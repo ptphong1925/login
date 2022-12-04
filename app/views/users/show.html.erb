@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="<%= dom_id @user %>">
+  <p>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </p>
+
+  <p>
+    <strong>Password digest:</strong>
+    <%= @user.password_digest %>
+  </p>
+
+</div>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+
+  <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
