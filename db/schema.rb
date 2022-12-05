@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_05_145733) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_161953) do
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.integer "year_published"
+    t.integer "isbn"
+    t.decimal "price"
+    t.boolean "out_of_print"
+    t.integer "views"
+    t.integer "supplier_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_id"], name: "index_books_on_supplier_id"
+    t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -32,4 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_145733) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "books", "suppliers"
+  add_foreign_key "books", "users"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :books
   resources :suppliers
   get 'login', to: 'login#new'
   post 'login', to: 'login#create'

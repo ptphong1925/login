@@ -11,7 +11,7 @@
 rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer
 rails generate scaffold Author first_name last_name title
 rails generate scaffold Supplier name
-rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references author:references
+rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references
 rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references
 rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer
 rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references
@@ -40,14 +40,14 @@ rails generate scaffold Order date_submited:time status:integer subtotal:decimal
                         tax: Faker::Number.decimal(l_digits: 0, r_digits: 1),
                         total: Faker::Number.decimal(l_digits: 3, r_digits: 1),
                         customer_id: rand(1..50)) }
-10.times { Book.create!(title: Faker::Quote.robin,
+30.times { Book.create!(title: Faker::Quote.robin,
                         year_published: rand(1800..2000),
                         isbn: Faker::Barcode.ean(8),
                         price: Faker::Number.decimal(l_digits: 2, r_digits: 1),
                         out_of_print: Faker::Boolean.boolean(true_ratio: 0.75),
                         views: rand(1000),
-                        supplier_id: rand(1..10),
-                        author_id: rand(1..3)) }
+                        supplier_id: Supplier.pluck(:id).sample,
+                        user_id: User.authors.pluck(:id).sample ) }
 
 100.times { Review.create!(title: Faker::Quote.singular_siegler,
                         body: Faker::Quote.most_interesting_man_in_the_world,
