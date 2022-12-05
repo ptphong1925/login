@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
-  before_action :authorized
-  after_action :verify_authorized, except: :index
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
   def index
     @users = User.all
-    render layout: false
   end
 
   # GET /users/1 or /users/1.json
   def show
-    authorize @user
   end
 
   # GET /users/new
@@ -21,18 +17,14 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-
   end
 
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+
     respond_to do |format|
       if @user.save
-        payload = { user_id: @user.id }
-        hmac_secret = 'my$ecretK3y'
-        token_user = JWT.encode(payload, hmac_secret, 'HS256')
-        @user.update(token_user: token_user)
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -73,6 +65,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password_digest, :first_name, :last_name, :role, :token_user, :email, :visits, :orders_count, :lock_version)
     end
 end

@@ -19,8 +19,10 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Last name", with: @user.last_name
     fill_in "Lock version", with: @user.lock_version
     fill_in "Orders count", with: @user.orders_count
+    fill_in "Password digest", with: @user.password_digest
     fill_in "Role", with: @user.role
     fill_in "Token user", with: @user.token_user
+    fill_in "Username", with: @user.username
     fill_in "Visits", with: @user.visits
     click_on "Create User"
 
@@ -37,8 +39,10 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Last name", with: @user.last_name
     fill_in "Lock version", with: @user.lock_version
     fill_in "Orders count", with: @user.orders_count
+    fill_in "Password digest", with: @user.password_digest
     fill_in "Role", with: @user.role
     fill_in "Token user", with: @user.token_user
+    fill_in "Username", with: @user.username
     fill_in "Visits", with: @user.visits
     click_on "Update User"
 
