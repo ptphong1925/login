@@ -76,7 +76,7 @@ gem "image_processing"
 gem 'faker'
 gem 'tailwindcss-rails'
 gem 'view_component'
-#gem 'act'
+gem 'dotenv-rails'
 gem 'mini_magick'
 gem 'rack-cors'
 gem 'i18n'
