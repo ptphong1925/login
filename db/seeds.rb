@@ -5,3 +5,55 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+
+rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer
+rails generate scaffold Author first_name last_name title
+rails generate scaffold Supplier name
+rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references author:references
+rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references
+rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer
+rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references
+
+
+3.times { Author.create!(first_name: Faker::Name.first_name,
+                        last_name: Faker::Name.last_name,
+                        title: Faker::Quote.singular_siegler) }
+50.times { |n| User.create!(username: "user#{n+1}",
+                            password: "password",
+                            password_confirmation: "password",
+                            first_name: Faker::Name.first_name,
+                            last_name: Faker::Name.last_name,
+                            role: ['basic', 'basic', 'basic', 'admin', 'author'].sample,
+                            email: Faker::Internet.free_email,
+                            visits: rand(100),
+                            orders_count: rand(100),
+                            lock_version: rand(10)) }
+
+10.times { Supplier.create!(name: Faker::Company.name) }
+
+50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
+                        status: rand(0..3),
+                        subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),
+                        shipping: Faker::Number.decimal(l_digits: 2, r_digits: 1),
+                        tax: Faker::Number.decimal(l_digits: 0, r_digits: 1),
+                        total: Faker::Number.decimal(l_digits: 3, r_digits: 1),
+                        customer_id: rand(1..50)) }
+10.times { Book.create!(title: Faker::Quote.robin,
+                        year_published: rand(1800..2000),
+                        isbn: Faker::Barcode.ean(8),
+                        price: Faker::Number.decimal(l_digits: 2, r_digits: 1),
+                        out_of_print: Faker::Boolean.boolean(true_ratio: 0.75),
+                        views: rand(1000),
+                        supplier_id: rand(1..10),
+                        author_id: rand(1..3)) }
+
+100.times { Review.create!(title: Faker::Quote.singular_siegler,
+                        body: Faker::Quote.most_interesting_man_in_the_world,
+                        rating: rand(1..5),
+                        state: rand(0..2),
+                        customer_id: rand(1..50),
+                        book_id: rand(1..10)) }
+
+puts 'SEED done!!!!'
