@@ -1,16 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  after_action :verify_authorized
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.not_admin
+    authorize @users
   end
 
   # GET /users/1 or /users/1.json
   def show
+    authorize @user
   end
 
-  # GET /users/new
+  # GET /users/new 
   def new
     @user = User.new
   end
@@ -25,6 +28,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        payload = { user_id: @user.id }
+        hmac_secret = 'my$ecretK3y'
+        token_user = JWT.encode(payload, hmac_secret, 'HS256')
+        @user.update(token_user: token_user)
+        session[:token_user] = token_user
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -52,7 +60,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to root_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
   end
