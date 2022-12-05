@@ -1,8 +1,11 @@
 class ApplicationController < ActionController::Base
-    include Pundit::Authorization
-    before_action :authorized
 
-    helper_method :logged_in?, :current_user
+    include Pundit::Authorization
+
+    before_action :authenticate_user!
+    helper_method :user_signed_in?, :current_user
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
     def current_user
         if session[:token_user]
             token = session[:token_user]
@@ -13,13 +16,21 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    def logged_in?
+    def user_signed_in?
         !!current_user
     end
 
-    def authorized
-        if !logged_in?
-            redirect_to login_path
+    def authenticate_user!
+        if !user_signed_in?
+            redirect_to signin_path
         end
+    end
+
+    private
+
+    def user_not_authorized
+        
+        redirect_back(fallback_location: root_path)
+        flash.now[:notice] = "You are not authorized to perform this action."
     end
 end
