@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     include Pundit::Authorization
     before_action :authorized
+
     helper_method :logged_in?, :current_user
     def current_user
         if session[:token_user]

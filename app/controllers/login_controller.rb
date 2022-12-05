@@ -18,7 +18,7 @@ class LoginController < ApplicationController
     session[:token_user] = nil
     redirect_to login_path
   end
-
+  private
   def login_params
     params.permit(:username, :password)
   end
