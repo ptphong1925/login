@@ -82,3 +82,5 @@ gem 'rack-cors'
 gem 'i18n'
 gem 'rspec'
 gem 'groupdate'
+gem 'pundit'
+
