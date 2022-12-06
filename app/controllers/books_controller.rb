@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-
+  # skip_after_action :verify_authorized
   # GET /books or /books.json
   def index
     @books = Book.all
+    authorize @books
   end
 
   # GET /books/1 or /books/1.json
