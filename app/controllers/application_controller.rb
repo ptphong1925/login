@@ -10,12 +10,16 @@ class ApplicationController < ActionController::Base
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
 
     def current_user
-        if session[:token_user]
-            token = session[:token_user]
+        if session[:token_person]
+            token = session[:token_person]
             hmac_secret = 'my$ecretK3y'
-            token_user = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
-            user_id = token_user[0]['user_id']
-            User.find(user_id)
+            token_person = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
+            person_id = token_person[0]['person_id']
+            begin
+                User.find(person_id)
+            rescue ActiveRecord::RecordNotFound
+                Admin.find(person_id)
+            end
         end
     end
 

@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class AdminPolicy < ApplicationPolicy
     def index?
         user.class.name == "Admin"
     end

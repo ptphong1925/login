@@ -2,7 +2,10 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!, except: :new
   before_action :set_user, only: %i[ show edit update destroy ]
+
   before_action(only: [:show, :edit, :update, :destroy]) { authorize @user }
+  after_action(only: [:index]) { authorize @users }
+  after_action(only: [:new, :create]) { authorize @user }
 
 
   # GET /users or /users.json

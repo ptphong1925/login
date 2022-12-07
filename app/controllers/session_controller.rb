@@ -4,22 +4,23 @@ class SessionController < ApplicationController
   skip_after_action :verify_authorized
 
   def create 
-    @person = User.find_by(username: params[:username]) || Admin.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
-      payload = { user_id: @user.id }
+    @person = User.find_by(username: params[:username])
+    @person = Admin.find_by(username: params[:username]) if @person.nil?
+    if @person && @person.authenticate(params[:password])
+      payload = { person_id: @person.id }
       hmac_secret = 'my$ecretK3y'
-      token_user = JWT.encode(payload, hmac_secret, 'HS256')
-      @user.update(token_user: token_user)
-      session[:token_user] = token_user
+      token_person = JWT.encode(payload, hmac_secret, 'HS256')
+      @person.update(token_user: token_person)
+      session[:token_person] = token_person
       flash[:notice] = "Đăng nhập thành công!!!"
-      redirect_to @user
+      redirect_to @person
     else
       redirect_to signin_path
     end
   end
    
   def destroy
-    session[:token_user] = nil
+    session[:token_person] = nil
     flash[:notice] = "Đăng xuất thành công!!!"
     redirect_to root_path
   end

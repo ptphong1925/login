@@ -1,6 +1,10 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: :new
 
+  before_action(only: [:show, :edit, :update, :destroy]) { authorize @admin }
+  after_action(only: [:index]) { authorize @admins }
+  after_action(only: [:new, :create]) { authorize @admin }
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
