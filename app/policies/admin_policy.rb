@@ -3,19 +3,19 @@ class AdminPolicy < ApplicationPolicy
         user.class.name == "Admin"
     end
     def show?
-        false
+        index?
     end
 
     def new?
-        true
+        false
     end
 
     def create?
-        new?
+        false
     end
 
     def edit?
-        true
+        user == record
     end
 
     def update?

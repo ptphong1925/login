@@ -1,13 +1,13 @@
 class UserPolicy < ApplicationPolicy
     def index?
-        user.class.name == "Admin"
+        user.class.name == "Admin" || user
     end
     def show?
-        false
+        user.class.name == "Admin" || user
     end
 
     def new?
-        true
+        user.nil?
     end
 
     def create?
@@ -15,7 +15,7 @@ class UserPolicy < ApplicationPolicy
     end
 
     def edit?
-        true
+        user == record
     end
 
     def update?
