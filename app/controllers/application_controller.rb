@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     after_action :verify_authorized
 
     helper_method :user_signed_in?, :current_user
-    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
 
     def current_user
         if session[:token_user]
@@ -30,9 +30,8 @@ class ApplicationController < ActionController::Base
 
     private
 
-    def user_not_authorized
-        
-        redirect_back(fallback_location: root_path)
+    def user_not_authorized(exception)
         flash[:notice] = "You are not authorized to perform this action."
+        head 404
     end
 end
