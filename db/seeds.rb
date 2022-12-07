@@ -7,39 +7,35 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-
+rails generate scaffold Admin username password_digest first_name last_name token_user email
 rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer
-rails generate scaffold Author first_name last_name title
+#rails generate scaffold Author first_name last_name title
 rails generate scaffold Supplier name
 rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references
-rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references
-rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer
-rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references
+# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references
+# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer
+# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references
 
-
-3.times { Author.create!(first_name: Faker::Name.first_name,
-                        last_name: Faker::Name.last_name,
-                        title: Faker::Quote.singular_siegler) }
+5.times { |n| Admin.create!(username: "admin#{n+1}",
+                            password: "password",
+                            password_confirmation: "password",
+                            first_name: Faker::Name.first_name,
+                            last_name: Faker::Name.last_name,
+                            email: "admin#{n+1}@gmail.com",
+                            ) }
 50.times { |n| User.create!(username: "user#{n+1}",
                             password: "password",
                             password_confirmation: "password",
                             first_name: Faker::Name.first_name,
                             last_name: Faker::Name.last_name,
-                            role: ['basic', 'basic', 'basic', 'admin', 'author'].sample,
-                            email: Faker::Internet.free_email,
+                            role: ['basic', 'basic', 'basic', 'author'].sample,
+                            email: "user#{n+1}@gmail.com",
                             visits: rand(100),
                             orders_count: rand(100),
                             lock_version: rand(10)) }
 
-10.times { Supplier.create!(name: Faker::Company.name) }
+5.times { Supplier.create!(name: Faker::Company.name) }
 
-50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
-                        status: rand(0..3),
-                        subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),
-                        shipping: Faker::Number.decimal(l_digits: 2, r_digits: 1),
-                        tax: Faker::Number.decimal(l_digits: 0, r_digits: 1),
-                        total: Faker::Number.decimal(l_digits: 3, r_digits: 1),
-                        customer_id: rand(1..50)) }
 30.times { Book.create!(title: Faker::Quote.robin,
                         year_published: rand(1800..2000),
                         isbn: Faker::Barcode.ean(8),
@@ -48,12 +44,19 @@ rails generate scaffold Order date_submited:time status:integer subtotal:decimal
                         views: rand(1000),
                         supplier_id: Supplier.pluck(:id).sample,
                         user_id: User.authors.pluck(:id).sample ) }
+# 50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
+#                         status: rand(0..3),
+#                         subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),
+#                         shipping: Faker::Number.decimal(l_digits: 2, r_digits: 1),
+#                         tax: Faker::Number.decimal(l_digits: 0, r_digits: 1),
+#                         total: Faker::Number.decimal(l_digits: 3, r_digits: 1),
+#                         customer_id: rand(1..50)) }
 
-100.times { Review.create!(title: Faker::Quote.singular_siegler,
-                        body: Faker::Quote.most_interesting_man_in_the_world,
-                        rating: rand(1..5),
-                        state: rand(0..2),
-                        customer_id: rand(1..50),
-                        book_id: rand(1..10)) }
+# 100.times { Review.create!(title: Faker::Quote.singular_siegler,
+#                         body: Faker::Quote.most_interesting_man_in_the_world,
+#                         rating: rand(1..5),
+#                         state: rand(0..2),
+#                         customer_id: rand(1..50),
+#                         book_id: rand(1..10)) }
 
 puts 'SEED done!!!!'

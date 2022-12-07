@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  get 'session/new'
+  resources :admins
+  resources :authors
   resources :books
   resources :suppliers
-  get 'login', to: 'login#new'
-  post 'login', to: 'login#create'
-  delete 'login', to: 'login#destroy'
   get 'signin', to: 'session#new'
   post 'signin', to: 'session#create'
   delete 'signout', to: 'session#destroy'

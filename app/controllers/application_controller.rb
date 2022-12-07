@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
 
     include Pundit::Authorization
-
+    # skip_before_action :authenticate_user!
+    # skip_after_action :verify_authorized
     before_action :authenticate_user!
     after_action :verify_authorized
 
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
             hmac_secret = 'my$ecretK3y'
             token_user = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
             user_id = token_user[0]['user_id']
-            @user = User.find(user_id)
+            User.find(user_id)
         end
     end
 

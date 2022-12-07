@@ -4,7 +4,7 @@ class SessionController < ApplicationController
   skip_after_action :verify_authorized
 
   def create 
-    @user = User.find_by(username: params[:username])
+    @person = User.find_by(username: params[:username]) || Admin.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       payload = { user_id: @user.id }
       hmac_secret = 'my$ecretK3y'
