@@ -1,6 +1,6 @@
 class AdminPolicy < ApplicationPolicy
     def index?
-        user.class.name == "Admin"
+        user.admin?
     end
     def show?
         index?

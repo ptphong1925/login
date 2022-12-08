@@ -1,9 +1,9 @@
 class UserPolicy < ApplicationPolicy
     def index?
-        user.class.name == "Admin" || user
+        user.admin? || user
     end
     def show?
-        user.class.name == "Admin" || user
+        user.admin? || user
     end
 
     def new?

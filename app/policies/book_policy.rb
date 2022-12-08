@@ -1,22 +1,21 @@
-class AuthorPolicy < ApplicationPolicy
+class BookPolicy < ApplicationPolicy
     def index?
-        user.class.name == "Admin" ||
-        user.author?
+        true
     end
     def show?
         index?
     end
 
     def new?
-        false
+        user.author?
     end
 
     def create?
-        false
+        new?
     end
 
     def edit?
-        user.author? && user == record
+        user == record.author
     end
 
     def update?
