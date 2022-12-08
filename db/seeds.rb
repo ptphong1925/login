@@ -9,9 +9,10 @@
 
 rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
 rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
-#rails generate scaffold Author first_name last_name title deleted_at:datetime:index
 rails generate scaffold Supplier name deleted_at:datetime:index
 rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
+#rails generate scaffold Post
+#rails generate scaffold Author first_name last_name title deleted_at:datetime:index
 # rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
 # rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references deleted_at:datetime:index
