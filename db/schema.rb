@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_141843) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_132738) do
   create_table "admins", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_141843) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_admins_on_deleted_at"
   end
 
   create_table "books", force: :cascade do |t|
@@ -33,6 +35,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_141843) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_books_on_deleted_at"
     t.index ["supplier_id"], name: "index_books_on_supplier_id"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
@@ -41,6 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_141843) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_suppliers_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_07_141843) do
     t.integer "lock_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
   add_foreign_key "books", "suppliers"

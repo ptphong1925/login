@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
     private
     def username_uniqueness
-        unless Admin.find_by(username: self.username).nil? && User.find(username: self.username).nil?
+        unless Admin.find_by(username: self.username).nil? && User.find_by(username: self.username).nil?
             errors.add(:username, "is not active")
         end
     end

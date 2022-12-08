@@ -7,14 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-rails generate scaffold Admin username password_digest first_name last_name token_user email
-rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer
-#rails generate scaffold Author first_name last_name title
-rails generate scaffold Supplier name
-rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references
-# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references
-# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer
-# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references
+rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
+rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+#rails generate scaffold Author first_name last_name title deleted_at:datetime:index
+rails generate scaffold Supplier name deleted_at:datetime:index
+rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
+# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
+# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references deleted_at:datetime:index
 
 5.times { |n| Admin.create!(username: "admin#{n+1}",
                             password: "password",
@@ -36,14 +36,14 @@ rails generate scaffold Book title year_published:integer isbn:integer price:dec
 
 5.times { Supplier.create!(name: Faker::Company.name) }
 
-30.times { Book.create!(title: Faker::Quote.robin,
+30.times { Book.create!(title: Faker::Books::Lovecraft.tome,
                         year_published: rand(1800..2000),
                         isbn: Faker::Barcode.ean(8),
                         price: Faker::Number.decimal(l_digits: 2, r_digits: 1),
                         out_of_print: Faker::Boolean.boolean(true_ratio: 0.75),
                         views: rand(1000),
                         supplier_id: Supplier.pluck(:id).sample,
-                        user_id: User.authors.pluck(:id).sample ) }
+                        user_id: Author.pluck(:id).sample ) }
 # 50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
 #                         status: rand(0..3),
 #                         subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),

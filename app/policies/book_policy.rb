@@ -7,7 +7,7 @@ class BookPolicy < ApplicationPolicy
     end
 
     def new?
-        user.author?
+        true
     end
 
     def create?

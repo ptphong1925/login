@@ -83,4 +83,4 @@ gem 'i18n'
 gem 'rspec'
 gem 'groupdate'
 gem 'pundit'
-
+gem 'paranoia'
