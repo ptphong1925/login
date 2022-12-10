@@ -1,6 +1,10 @@
 class CataloguesController < ApplicationController
+  before_action :authenticate_user!, except: :new
   before_action :set_catalogue, only: %i[ show edit update destroy ]
 
+  before_action(only: [:show, :edit, :update, :destroy]) { authorize @catalogue }
+  after_action(only: [:index]) { authorize @catalogues }
+  after_action(only: [:new, :create]) { authorize @catalogue }
   # GET /catalogues or /catalogues.json
   def index
     @catalogues = Catalogue.all
