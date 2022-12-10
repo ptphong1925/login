@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :posts
+  resources :catalogues
   resources :admins
   resources :authors
   resources :books

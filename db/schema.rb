@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_132738) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_082138) do
   create_table "admins", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -39,6 +39,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_132738) do
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
     t.index ["supplier_id"], name: "index_books_on_supplier_id"
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "catalogues", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.string "commenter_type", null: false
+    t.integer "commenter_id", null: false
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["commenter_type", "commenter_id"], name: "index_comments_on_commenter"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "poster_type", null: false
+    t.integer "poster_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poster_type", "poster_id"], name: "index_posts_on_poster"
   end
 
   create_table "suppliers", force: :cascade do |t|
