@@ -7,8 +7,8 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = FilterService.new(Book.all)
-    @books = @books.filer_by_keyword(params[:keyword], "books.title" )
+    @books = FilterService.new(Book.joins(:author))
+    @books = @books.filer_by_keyword(params[:keyword], "books.title", "users.first_name", "users.last_name" )
   end
 
   # GET /books/1 or /books/1.json
@@ -70,6 +70,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :year_published, :isbn, :price, :out_of_print, :views, :supplier_id, :user_id, :keyword)
+      params.require(:book).permit(:title, :year_published, :isbn, :price, :out_of_print, :views, :supplier_id, :user_id)
     end
 end
