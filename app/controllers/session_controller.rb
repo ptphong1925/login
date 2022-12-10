@@ -7,7 +7,7 @@ class SessionController < ApplicationController
     @person = User.find_by(username: params[:username])
     @person = Admin.find_by(username: params[:username]) if @person.nil?
     if @person && @person.authenticate(params[:password])
-      payload = { person_id: @person.id }
+      payload = { person_id: @person.id, person_role: @person.class.name }
       hmac_secret = 'my$ecretK3y'
       token_person = JWT.encode(payload, hmac_secret, 'HS256')
       @person.update(token_user: token_person)

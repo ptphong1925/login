@@ -8,7 +8,7 @@
     <%= link_to 'New book', new_book_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
   <div>
-    <%= form_with do |form| %>
+    <%= form_with(method: :get) do |form| %>
       <%= form.text_field :keyword, placeholder: "Keyword for search" %>
       <%= form.submit "Search" %>
     <% end %>

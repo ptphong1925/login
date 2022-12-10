@@ -7,8 +7,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.joins(:author).all
-
+    @books = FilterService.new(Book.all).filer_by_keyword(params[:keyword], "books.title" )
   end
 
   # GET /books/1 or /books/1.json

@@ -6,6 +6,10 @@ class Admin < ApplicationRecord
         true
     end
 
+    def role
+        "admin"
+    end
+
     private
 
     def username_uniqueness

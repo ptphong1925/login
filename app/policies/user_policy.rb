@@ -1,6 +1,6 @@
 class UserPolicy < ApplicationPolicy
     def index?
-        user.admin? || user
+        true
     end
     def show?
         user.admin? || user
