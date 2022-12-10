@@ -5,7 +5,7 @@ class FilterService < ApplicationService
 
     def filer_by_keyword(keyword, *field)
         if keyword.nil?
-            @collection
+            return @collection
         else
             #Khai báo string rỗng
             filter_statement = ""
@@ -15,7 +15,7 @@ class FilterService < ApplicationService
             filter_statement = filter_statement[0..-5]
             #Thực hiện câu query
             @collection = @collection.where(filter_statement, keyword: "%"+keyword+"%")
-            
+            return @collection
         end
     end
 end

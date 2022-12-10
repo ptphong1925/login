@@ -8,7 +8,8 @@ class AuthorsController < ApplicationController
   after_action(only: [:new, :create]) { authorize @author }
 
   def index
-    @authors = Author.all
+    @authors = FilterService.new(Author.all)
+    @authors = @authors.filer_by_keyword(params[:keyword], "users.username", "users.first_name", "users.last_name" )
   end
 
   def show
@@ -37,6 +38,6 @@ class AuthorsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def author_params
-    params.require(:author).permit(:username, :password_digest, :first_name, :last_name, :role, :token_user, :email, :visits, :orders_count, :lock_version)
+    params.require(:author).permit(:username, :password_digest, :first_name, :last_name, :role, :token_user, :email, :visits, :orders_count, :lock_version, :keyword)
   end
 end

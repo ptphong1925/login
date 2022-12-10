@@ -7,7 +7,9 @@
     <h1 class="font-bold text-4xl">Admins</h1>
     <%= link_to 'New admin', new_admin_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
+  <div>
+    <%= render(FilterFormComponent.new(url: request.path, method: :get)) %>
+  <div>
   <div id="admins" class="min-w-full">
     <%= render @admins %>
   </div>

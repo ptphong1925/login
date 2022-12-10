@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = FilterService.new(User.all)
-    @users = @users.filer_by_keyword(params[:keyword], 'users.first_name', 'users.last_name', 'users.email')
+    @users = @users.filer_by_keyword(params[:keyword], 'users.first_name', 'users.last_name', 'users.email', 'users.role')
   end
 
   # GET /users/1 or /users/1.json
