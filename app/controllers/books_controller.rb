@@ -7,7 +7,7 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.joins(:author).filter_keyword(params[:keyword])
+    @books = Book.joins(:author).all
 
   end
 
