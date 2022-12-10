@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def index
     @users = FilterService.new(User.all)
     @users = @users.filer_by_keyword(params[:keyword], 'users.first_name', 'users.last_name', 'users.email')
-    debugger
   end
 
   # GET /users/1 or /users/1.json
