@@ -3,8 +3,8 @@ class User < ApplicationRecord
     validate :username_uniqueness, on: :create
 
     enum role: { basic: 'basic', author: 'author' }
-
-    has_many :post, as: :poster
+    
+    has_many :posts, as: :poster
     
     scope :authors, -> { where(role: :author) }
     scope :basics, -> { where(role: :basic) }
