@@ -264,7 +264,7 @@ DEPENDENCIES
   faker
   groupdate
   i18n
-  image_processing
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   jwt

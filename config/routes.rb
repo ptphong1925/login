@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root "home#index"
+  resources :videos
+  resources :musics
   resources :comments
   resources :posts
   resources :catalogues
@@ -13,5 +16,5 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "home#index"
+
 end

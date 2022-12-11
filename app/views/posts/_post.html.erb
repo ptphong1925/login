@@ -11,9 +11,17 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Poster:</strong>
-    <%= post.poster_id %>
+    <%= post.poster_type %>
   </p>
 
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Poster:</strong>
+    <%= post.poster_id %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Image:</strong>
+    <%= image_tag(post.image.variant(resize_to_limit: [300, nil])) if post.image.present? %>
+  </p>
   <% if action_name != "show" %>
     <%= link_to "Show this post", post, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this post', edit_post_path(post), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

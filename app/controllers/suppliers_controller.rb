@@ -1,5 +1,10 @@
 class SuppliersController < ApplicationController
+  before_action :authenticate_user!, except: :new
   before_action :set_supplier, only: %i[ show edit update destroy ]
+
+  before_action(only: [:show, :edit, :update, :destroy]) { authorize @supplier}
+  after_action(only: [:index]) { authorize @suppliers }
+  after_action(only: [:new, :create]) { authorize @supplier }
 
   # GET /suppliers or /suppliers.json
   def index
