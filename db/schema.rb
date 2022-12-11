@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -58,8 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_admins_on_deleted_at"
   end
 
   create_table "books", force: :cascade do |t|
@@ -73,8 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_books_on_deleted_at"
+    t.string "catalogue"
     t.index ["supplier_id"], name: "index_books_on_supplier_id"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
@@ -98,6 +95,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.index ["commenter_type", "commenter_id"], name: "index_comments_on_commenter"
   end
 
+  create_table "musics", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "catalogue"
+    t.string "poster_type", null: false
+    t.integer "poster_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poster_type", "poster_id"], name: "index_musics_on_poster"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -105,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.integer "poster_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "catalogue"
     t.index ["poster_type", "poster_id"], name: "index_posts_on_poster"
   end
 
@@ -112,8 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_suppliers_on_deleted_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -129,8 +136,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_094629) do
     t.integer "lock_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "catalogue"
+    t.string "poster_type", null: false
+    t.integer "poster_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poster_type", "poster_id"], name: "index_videos_on_poster"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

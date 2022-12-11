@@ -7,15 +7,17 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
-rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
-rails generate scaffold Supplier name deleted_at:datetime:index
-rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
-rails generate scaffold Catalogue name type catalogue_parent_id:integer
-rails generate scaffold Post title content poster:references{polymorphic}
-rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} 
-#rails generate scaffold Post
-#rails generate scaffold Author first_name last_name title deleted_at:datetime:index
+# rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
+# rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+# rails generate scaffold Supplier name deleted_at:datetime:index
+# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
+# rails generate scaffold Catalogue name type catalogue_parent_id:integer
+# rails generate scaffold Post title content catalogue poster:references{polymorphic}
+# rails generate scaffold Music title content catalogue poster:references{polymorphic}
+# rails generate scaffold Video title content catalogue poster:references{polymorphic}
+# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} 
+
+
 # rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
 # rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references deleted_at:datetime:index
@@ -27,7 +29,7 @@ rails generate scaffold Comment content commenter:references{polymorphic} commen
                             last_name: Faker::Name.last_name,
                             email: "admin#{n+1}@gmail.com",
                             ) }
-50.times { |n| User.create!(username: "user#{n+1}",
+20.times { |n| User.create!(username: "user#{n+1}",
                             password: "password",
                             password_confirmation: "password",
                             first_name: Faker::Name.first_name,
@@ -38,9 +40,11 @@ rails generate scaffold Comment content commenter:references{polymorphic} commen
                             orders_count: rand(100),
                             lock_version: rand(10)) }
 
-5.times { Supplier.create!(name: Faker::Games::Dota.team) }
-
-30.times { Book.create!(title: Faker::Books::Lovecraft.tome,
+10.times { Supplier.create!(name: Faker::Games::Dota.hero) }
+20.times { Catalogue.create!(name: Faker::Games::Dota.item,
+                            catalogue_parent_id: ['', Catalogue.pluck(:id).sample].sample) }
+20.times { Book.create!(title: Faker::Book.title,
+                        catalogue: Catalogue.pluck(:name).sample,
                         year_published: rand(1800..2000),
                         isbn: Faker::Barcode.ean(8),
                         price: Faker::Number.decimal(l_digits: 2, r_digits: 1),
@@ -48,8 +52,54 @@ rails generate scaffold Comment content commenter:references{polymorphic} commen
                         views: rand(1000),
                         supplier_id: Supplier.pluck(:id).sample,
                         user_id: Author.pluck(:id).sample ) }
-10.times { Catalogue.create!(name: Faker::Games::Witcher.location,
-                            catalogue_parent_id: ['', Catalogue.pluck(:id).sample].sample) }
+
+#Post
+20.times do
+    person = (User.all + Admin.all).sample
+    person.posts.build(title: Faker::GreekPhilosophers.quote, catalogue: Catalogue.pluck(:name).sample).save
+end
+#Musics
+20.times do
+    person = (User.all + Admin.all).sample
+    person.musics.build(title: Faker::Music.album, catalogue: Catalogue.pluck(:name).sample).save
+end
+#Video
+20.times do
+    person = (User.all + Admin.all).sample
+    person.videos.build(title: Faker::Movies::Hobbit.character, catalogue: Catalogue.pluck(:name).sample).save
+end
+1000.times do
+    person = (User.all + Admin.all).sample
+    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    comment.save
+    (Post.all + Music.all + Video.all).sample.comments << comment
+end
+# User.all.each do |user|
+#     Post.all.each do |post|
+#         comment = user.comments.build(content: Faker::Games::Dota.quote)
+#         post.comments << comment
+#     end
+# end
+# User.all.each do |user|
+#     Post.all.each do |post|
+#         comment = user.comments.build(content: Faker::Movies::HarryPotter.quote)
+#         post.comments << comment
+#     end
+# end
+# Admin.all.each do |admin|
+#     Post.all.each do |post|
+#         comment = admin.comments.build(content: Faker::Movies::HarryPotter.quote)
+#         post.comments << comment
+#     end
+# end
+
+
+
+
+
+
+
+
 # 50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
 #                         status: rand(0..3),
 #                         subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),

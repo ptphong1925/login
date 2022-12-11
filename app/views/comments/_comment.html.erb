@@ -6,11 +6,21 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Commenter:</strong>
+    <%= comment.commenter.first_name %> <%= comment.commenter.last_name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Commenter ID:</strong>
     <%= comment.commenter_id %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Commentable:</strong>
+    <%= comment.commentable.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Commentable ID:</strong>
     <%= comment.commentable_id %>
   </p>
 
