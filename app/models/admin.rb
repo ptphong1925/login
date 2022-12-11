@@ -2,6 +2,8 @@ class Admin < ApplicationRecord
     has_secure_password
     validate :username_uniqueness, on: :create
 
+    has_many :post, as: :poster 
+
     def admin?
         true
     end

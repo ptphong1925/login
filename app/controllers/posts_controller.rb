@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: :new
+  before_action(only: [:show, :edit, :update, :destroy]) { authorize @post}
+  after_action(only: [:index]) { authorize @posts }
+  after_action(only: [:new, :create]) { authorize @post }
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json

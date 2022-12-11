@@ -11,7 +11,7 @@ rails generate scaffold Admin username password_digest first_name last_name toke
 rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 rails generate scaffold Supplier name deleted_at:datetime:index
 rails generate scaffold Book title year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
-rails generate scaffold Catalogue name type
+rails generate scaffold Catalogue name type catalogue_parent_id:integer
 rails generate scaffold Post title content poster:references{polymorphic}
 rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} 
 #rails generate scaffold Post
@@ -38,7 +38,7 @@ rails generate scaffold Comment content commenter:references{polymorphic} commen
                             orders_count: rand(100),
                             lock_version: rand(10)) }
 
-5.times { Supplier.create!(name: Faker::Company.name) }
+5.times { Supplier.create!(name: Faker::Games::Dota.team) }
 
 30.times { Book.create!(title: Faker::Books::Lovecraft.tome,
                         year_published: rand(1800..2000),
@@ -48,6 +48,8 @@ rails generate scaffold Comment content commenter:references{polymorphic} commen
                         views: rand(1000),
                         supplier_id: Supplier.pluck(:id).sample,
                         user_id: Author.pluck(:id).sample ) }
+10.times { Catalogue.create!(name: Faker::Games::Witcher.location,
+                            catalogue_parent_id: ['', Catalogue.pluck(:id).sample].sample) }
 # 50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
 #                         status: rand(0..3),
 #                         subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),
