@@ -58,7 +58,7 @@
 10.times { Supplier.create!(name: Faker::Games::Dota.hero) }
 5.times { Catalogue.create!(name: Faker::Games::Dota.item) }
 15.times { Catalogue.create!(name: Faker::Games::Dota.item,
-                            parent_id: Catalogue.pluck(:id).sample }
+                            parent_id: Catalogue.pluck(:id).sample) }
 20.times { Book.create!(title: Faker::Book.title,
                         catalogue: Catalogue.pluck(:name).sample,
                         year_published: rand(1800..2000),
