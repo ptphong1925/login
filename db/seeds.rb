@@ -7,8 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
-# rails generate scaffold User username password_digest first_name last_name role token_user email balance:decimal visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+# rails generate scaffold Admin username password_digest first_name last_name token_user email balance:decimal nation birtday:datetime deleted_at:datetime:index
+# rails generate scaffold User username password_digest first_name last_name role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Supplier name deleted_at:datetime:index
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
 # rails generate scaffold Catalogue name type parent_id:integer
@@ -23,6 +23,11 @@
 # rails generate scaffold Invoice
 # rails generate scaffold Friendship
 # rails generate scaffold Follow
+# rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
+# rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
+# rails generate scaffold Relation che me anh chi dong nghiep
+# rails generate scaffold Event name adress time:datetime catalogue
+# rails generate scaffold Orginazation name country catalogue
 
 
 
