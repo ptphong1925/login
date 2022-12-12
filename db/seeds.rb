@@ -29,7 +29,7 @@
 # rails generate scaffold Event name adress time:datetime catalogue
 # rails generate scaffold Orginazation name country catalogue
 # rails generate scaffold Message type(two/many) messager content
-
+# rails generate scaffold Statistic
 
 
 # rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
