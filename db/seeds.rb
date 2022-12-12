@@ -11,11 +11,12 @@
 # rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Supplier name deleted_at:datetime:index
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
-# rails generate scaffold Catalogue name type catalogue_parent_id:integer
+# rails generate scaffold Catalogue name type parent_id:integer
 # rails generate scaffold Post title content catalogue poster:references{polymorphic}
 # rails generate scaffold Music title content catalogue poster:references{polymorphic}
 # rails generate scaffold Video title content catalogue poster:references{polymorphic}
-# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} 
+# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic}
+# rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references
 
 
 # rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
@@ -41,8 +42,9 @@
                             lock_version: rand(10)) }
 
 10.times { Supplier.create!(name: Faker::Games::Dota.hero) }
-20.times { Catalogue.create!(name: Faker::Games::Dota.item,
-                            catalogue_parent_id: ['', Catalogue.pluck(:id).sample].sample) }
+5.times { Catalogue.create!(name: Faker::Games::Dota.item) }
+15.times { Catalogue.create!(name: Faker::Games::Dota.item,
+                            parent_id: Catalogue.pluck(:id).sample }
 20.times { Book.create!(title: Faker::Book.title,
                         catalogue: Catalogue.pluck(:name).sample,
                         year_published: rand(1800..2000),
@@ -68,11 +70,17 @@ end
     person = (User.all + Admin.all).sample
     person.videos.build(title: Faker::Movies::Hobbit.character, catalogue: Catalogue.pluck(:name).sample).save
 end
-1000.times do
+200.times do
     person = (User.all + Admin.all).sample
     comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
     comment.save
     (Post.all + Music.all + Video.all).sample.comments << comment
+end
+400.times do
+    person = (User.all + Admin.all).sample
+    subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    subcomment.save
+    (Post.all + Music.all + Video.all).sample.subcomments << subcomment
 end
 # User.all.each do |user|
 #     Post.all.each do |post|
