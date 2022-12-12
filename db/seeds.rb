@@ -28,7 +28,7 @@
 # rails generate scaffold Relation che me anh chi dong nghiep
 # rails generate scaffold Event name adress time:datetime catalogue
 # rails generate scaffold Orginazation name country catalogue
-# rails generate scaffold Message type(two/many) messager
+# rails generate scaffold Message type(two/many) messager content
 
 
 
