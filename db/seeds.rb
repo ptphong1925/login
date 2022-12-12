@@ -7,17 +7,17 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime deleted_at:datetime:index
-# rails generate scaffold User username password_digest first_name last_name phone:integer role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
-# rails generate scaffold Supplier name deleted_at:datetime:index
-# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
+# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime likes_count:integer
+# rails generate scaffold User username password_digest first_name last_name phone:integer role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer likes_count:integer
+# rails generate scaffold Supplier name
+# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
 # rails generate scaffold Catalogue name type parent_id:integer
 # rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
-# rails generate scaffold Post title content catalogue poster:references{polymorphic}
-# rails generate scaffold Song title content catalogue poster:references{polymorphic}
-# rails generate scaffold Video title content catalogue poster:references{polymorphic}
-# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic}
-# rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references
+# rails generate scaffold Post title content catalogue poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Song title content catalogue poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Video title content catalogue poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
+# rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references likes_count:integer
 # rails generate scaffold Payment
 # rails generate scaffold Order
 # rails generate scaffold Invoice
@@ -26,15 +26,15 @@
 # rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 # rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
 # rails generate scaffold Relation che me anh chi dong nghiep
-# rails generate scaffold Event name adress time:datetime catalogue
+# rails generate scaffold Event name adress time:datetime catalogue likes_count:integer
 # rails generate scaffold Orginazation name country catalogue
 # rails generate scaffold Message type(two/many) messager content
 # rails generate scaffold Statistic
 
 
-# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
-# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
-# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references deleted_at:datetime:index
+# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references 
+# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer 
+# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
 
 5.times { |n| Admin.create!(username: "admin#{n+1}",
                             password: "password",
