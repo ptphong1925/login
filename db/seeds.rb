@@ -8,7 +8,7 @@
 
 
 # rails generate scaffold Admin username password_digest first_name last_name token_user email deleted_at:datetime:index
-# rails generate scaffold User username password_digest first_name last_name role token_user email visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+# rails generate scaffold User username password_digest first_name last_name role token_user email balance:decimal visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Supplier name deleted_at:datetime:index
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
 # rails generate scaffold Catalogue name type parent_id:integer
@@ -37,6 +37,7 @@
                             last_name: Faker::Name.last_name,
                             role: ['basic', 'basic', 'basic', 'author'].sample,
                             email: "user#{n+1}@gmail.com",
+                            balance: Faker::Number.decimal(l_digits: 2, r_digits: 1),
                             visits: rand(100),
                             orders_count: rand(100),
                             lock_version: rand(10)) }
