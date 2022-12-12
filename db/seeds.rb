@@ -7,8 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# rails generate scaffold Admin username password_digest first_name last_name token_user email balance:decimal nation birtday:datetime deleted_at:datetime:index
-# rails generate scaffold User username password_digest first_name last_name role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
+# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime deleted_at:datetime:index
+# rails generate scaffold User username password_digest first_name last_name phone:integer role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer deleted_at:datetime:index
 # rails generate scaffold Supplier name deleted_at:datetime:index
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
 # rails generate scaffold Catalogue name type parent_id:integer
