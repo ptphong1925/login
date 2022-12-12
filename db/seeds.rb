@@ -12,11 +12,18 @@
 # rails generate scaffold Supplier name deleted_at:datetime:index
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views:integer supplier:references user:references deleted_at:datetime:index
 # rails generate scaffold Catalogue name type parent_id:integer
+# rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
 # rails generate scaffold Post title content catalogue poster:references{polymorphic}
 # rails generate scaffold Music title content catalogue poster:references{polymorphic}
 # rails generate scaffold Video title content catalogue poster:references{polymorphic}
 # rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic}
 # rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references
+# rails generate scaffold Payment
+# rails generate scaffold Order
+# rails generate scaffold Invoice
+# rails generate scaffold Friendship
+# rails generate scaffold Follow
+
 
 
 # rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references deleted_at:datetime:index
@@ -53,6 +60,7 @@
                         price: Faker::Number.decimal(l_digits: 2, r_digits: 1),
                         out_of_print: Faker::Boolean.boolean(true_ratio: 0.75),
                         views: rand(1000),
+                        rate: rand(6),
                         supplier_id: Supplier.pluck(:id).sample,
                         user_id: Author.pluck(:id).sample ) }
 
