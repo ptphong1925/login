@@ -14,7 +14,7 @@
 # rails generate scaffold Catalogue name type parent_id:integer
 # rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
 # rails generate scaffold Post title content catalogue poster:references{polymorphic}
-# rails generate scaffold Music title content catalogue poster:references{polymorphic}
+# rails generate scaffold Song title content catalogue poster:references{polymorphic}
 # rails generate scaffold Video title content catalogue poster:references{polymorphic}
 # rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic}
 # rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references
@@ -78,7 +78,7 @@ end
 #Musics
 20.times do
     person = (User.all + Admin.all).sample
-    person.musics.build(title: Faker::Music.album, catalogue: Catalogue.pluck(:name).sample).save
+    person.songs.build(title: Faker::Music.album, catalogue: Catalogue.pluck(:name).sample).save
 end
 #Video
 20.times do
@@ -89,13 +89,13 @@ end
     person = (User.all + Admin.all).sample
     comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
     comment.save
-    (Post.all + Music.all + Video.all).sample.comments << comment
+    (Post.all + Song.all + Video.all).sample.comments << comment
 end
 400.times do
     person = (User.all + Admin.all).sample
     subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
     subcomment.save
-    (Post.all + Music.all + Video.all).sample.subcomments << subcomment
+    (Post.all + Song.all + Video.all).sample.subcomments << subcomment
 end
 # User.all.each do |user|
 #     Post.all.each do |post|
