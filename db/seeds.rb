@@ -7,11 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime likes_count:integer
-# rails generate scaffold User username password_digest first_name last_name phone:integer role token_user email balance:decimal nation birtday:datetime visits:integer orders_count:integer lock_version:integer likes_count:integer
-# rails generate scaffold Supplier name
-# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
+# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer
+# rails generate scaffold User username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer role
 # rails generate scaffold Catalogue name type parent_id:integer
+# rails generate scaffold Orginazation name catalogue
+# rails generate scaffold Supplier name catalogue
+# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
 # rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
 # rails generate scaffold Post title content catalogue poster:references{polymorphic} likes_count:integer
 # rails generate scaffold Song title content catalogue poster:references{polymorphic} likes_count:integer
@@ -27,7 +28,6 @@
 # rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
 # rails generate scaffold Relation che me anh chi dong nghiep
 # rails generate scaffold Event name adress time:datetime catalogue likes_count:integer
-# rails generate scaffold Orginazation name country catalogue
 # rails generate scaffold Message type(two/many) messager content
 # rails generate scaffold Statistic
 
