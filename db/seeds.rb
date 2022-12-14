@@ -9,7 +9,10 @@
 
 # rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer
 # rails generate scaffold User username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer role
-# rails generate scaffold Catalogue name type parent_id:integer
+# rails generate scaffold Profile profiler:references{polymorphic}
+# rails generate scaffold Catalogue name parent_id:integer
+# rails generate scaffold Nation name
+# rails generate scaffold Location name parent_id:integer
 # rails generate scaffold Orginazation name catalogue
 # rails generate scaffold Supplier name catalogue
 # rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
@@ -20,10 +23,11 @@
 # rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
 # rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references likes_count:integer
 # rails generate scaffold Payment
-# rails generate scaffold Order
+# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
 # rails generate scaffold Invoice
 # rails generate scaffold Friendship
 # rails generate scaffold Follow
+# rails generate scaffold Group
 # rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 # rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
 # rails generate scaffold Relation che me anh chi dong nghiep
@@ -32,9 +36,7 @@
 # rails generate scaffold Statistic
 
 
-# rails generate scaffold Review title body:text rating:integer state:integer customer:references book:references 
-# rails generate scaffold Customer first_name last_name title email visits:integer orders_count:integer lock_version:integer 
-# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
+
 
 5.times { |n| Admin.create!(username: "admin#{n+1}",
                             password: "password",
