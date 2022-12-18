@@ -143,6 +143,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     paper_trail (14.0.0)
       activerecord (>= 6.0)
       request_store (~> 1.4)
@@ -206,6 +208,7 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    scientist (1.6.3)
     selenium-webdriver (4.7.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -269,12 +272,14 @@ DEPENDENCIES
   jbuilder
   jwt
   mini_magick
+  pagy
   paper_trail
   puma (~> 5.0)
   pundit
   rack-cors
   rails (~> 7.0.4)
   rspec
+  scientist
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
