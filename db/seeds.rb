@@ -31,12 +31,12 @@
 # rails generate scaffold Friendship
 # rails generate scaffold Follow
 # rails generate scaffold Group
-# rails generate scaffold React type reacter:references{polymorphic} reactable:references{polymorphic}
+# rails generate scaffold React role reacter:references{polymorphic} reactable:references{polymorphic}
 # rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 # rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
 # rails generate scaffold Relation che me anh chi dong nghiep
 # rails generate scaffold Event name adress time:datetime catalogue likes_count:integer
-# rails generate scaffold Message type(two/many) messager content
+# rails generate scaffold Message role(two/many) messager content
 # rails generate scaffold Statistic
 
 
