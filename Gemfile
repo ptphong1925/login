@@ -71,6 +71,10 @@ group :test do
   gem "webdrivers"
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 gem 'jwt'
 gem 'faker'
 gem 'tailwindcss-rails'
@@ -79,15 +83,15 @@ gem 'dotenv-rails'
 gem 'mini_magick'
 gem 'rack-cors'
 gem 'i18n'
-gem 'rspec'
 gem 'groupdate'
 gem 'pundit'
 gem 'paper_trail'
 gem 'discard'
 gem 'pagy'
 gem 'scientist'
-gem 'factory_bot'
+gem 'factory_bot_rails'
 gem 'sdoc'
 gem "omniauth"
+gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"

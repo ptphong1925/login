@@ -7,11 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer
-# rails generate scaffold User username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer role
-# rails generate scaffold Profile profiler:references{polymorphic}
+
+
 # rails generate scaffold Catalogue name parent_id:integer
 # rails generate scaffold Nation name
+# rails generate scaffold Admin username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer
+# rails generate scaffold User username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer role
+#Profile = User#show
+# rails generate scaffold Profile profiler:references{polymorphic}
 # rails generate scaffold Location name parent_id:integer
 # rails generate scaffold Orginazation name catalogue
 # rails generate scaffold Supplier name catalogue
@@ -28,6 +31,7 @@
 # rails generate scaffold Friendship
 # rails generate scaffold Follow
 # rails generate scaffold Group
+# rails generate scaffold React type reacter:references{polymorphic} reactable:references{polymorphic}
 # rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 # rails generate scaffold Report reporter:references{polymorphic} reportable:references{polymorphic}
 # rails generate scaffold Relation che me anh chi dong nghiep
