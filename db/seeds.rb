@@ -15,18 +15,19 @@
 # rails generate scaffold User username password_digest first_name last_name phone:integer token_user email balance:decimal nation birtday:datetime follows_count:integer role
 #Profile = User#show
 # rails generate scaffold Profile profiler:references{polymorphic}
-# rails generate scaffold Location name parent_id:integer
+# rails generate scaffold Location name parent_id:integer nation:references
 # rails generate scaffold Orginazation name catalogue
 # rails generate scaffold Supplier name catalogue
-# rails generate scaffold Book title catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
+# rails generate scaffold Book title status catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
 # rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
-# rails generate scaffold Post title content catalogue poster:references{polymorphic} likes_count:integer
-# rails generate scaffold Song title content catalogue poster:references{polymorphic} likes_count:integer
-# rails generate scaffold Video title content catalogue poster:references{polymorphic} likes_count:integer
-# rails generate scaffold Comment content commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
-# rails generate scaffold Subcomment content commenter:references{polymorphic} comment:references likes_count:integer
-# rails generate scaffold Payment
-# rails generate scaffold Order date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
+#không nên dùng Post cho tất cả, vì mỗi chilrent là rất lớn
+# rails generate scaffold Post title content catalogue status poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Song title content catalogue status poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Video title content catalogue status poster:references{polymorphic} likes_count:integer
+# rails generate scaffold Comment content status commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
+# rails generate scaffold Subcomment content status commenter:references{polymorphic} comment:references likes_count:integer
+# rails generate scaffold Payment status
+# rails generate scaffold Order status date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
 # rails generate scaffold Invoice
 # rails generate scaffold Friendship
 # rails generate scaffold Follow
@@ -41,7 +42,7 @@
 
 
 
-
+20.times {  }
 5.times { |n| Admin.create!(username: "admin#{n+1}",
                             password: "password",
                             password_confirmation: "password",
@@ -91,36 +92,20 @@ end
     person = (User.all + Admin.all).sample
     person.videos.build(title: Faker::Movies::Hobbit.character, catalogue: Catalogue.pluck(:name).sample).save
 end
+#Comment
 200.times do
     person = (User.all + Admin.all).sample
     comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
     comment.save
     (Post.all + Song.all + Video.all).sample.comments << comment
 end
+#Subcomment
 400.times do
     person = (User.all + Admin.all).sample
     subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
     subcomment.save
     (Post.all + Song.all + Video.all).sample.subcomments << subcomment
 end
-# User.all.each do |user|
-#     Post.all.each do |post|
-#         comment = user.comments.build(content: Faker::Games::Dota.quote)
-#         post.comments << comment
-#     end
-# end
-# User.all.each do |user|
-#     Post.all.each do |post|
-#         comment = user.comments.build(content: Faker::Movies::HarryPotter.quote)
-#         post.comments << comment
-#     end
-# end
-# Admin.all.each do |admin|
-#     Post.all.each do |post|
-#         comment = admin.comments.build(content: Faker::Movies::HarryPotter.quote)
-#         post.comments << comment
-#     end
-# end
 
 
 
@@ -129,19 +114,7 @@ end
 
 
 
-# 50.times { Order.create!(date_submited: Faker::Date.between(from: 50.days.ago, to: Date.today),
-#                         status: rand(0..3),
-#                         subtotal: Faker::Number.decimal(l_digits: 0, r_digits: 1),
-#                         shipping: Faker::Number.decimal(l_digits: 2, r_digits: 1),
-#                         tax: Faker::Number.decimal(l_digits: 0, r_digits: 1),
-#                         total: Faker::Number.decimal(l_digits: 3, r_digits: 1),
-#                         customer_id: rand(1..50)) }
 
-# 100.times { Review.create!(title: Faker::Quote.singular_siegler,
-#                         body: Faker::Quote.most_interesting_man_in_the_world,
-#                         rating: rand(1..5),
-#                         state: rand(0..2),
-#                         customer_id: rand(1..50),
-#                         book_id: rand(1..10)) }
+
 
 puts 'SEED done!!!!'
