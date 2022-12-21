@@ -65,6 +65,6 @@ class SubcommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def subcomment_params
-      params.require(:subcomment).permit(:content, :status, :commenter_id, :commenter_type, :comment_id, :likes_count)
+      params.require(:subcomment).permit(:content, :status, :subcommenter_id, :subcommenter_type, :comment_id, :likes_count)
     end
 end

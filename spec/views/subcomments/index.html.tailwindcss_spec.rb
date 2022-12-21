@@ -6,14 +6,14 @@ RSpec.describe "subcomments/index", type: :view do
       Subcomment.create!(
         content: "Content",
         status: "Status",
-        commenter: nil,
+        subcommenter: nil,
         comment: nil,
         likes_count: 2
       ),
       Subcomment.create!(
         content: "Content",
         status: "Status",
-        commenter: nil,
+        subcommenter: nil,
         comment: nil,
         likes_count: 2
       )

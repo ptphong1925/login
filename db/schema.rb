@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_21_154017) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_21_174209) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -161,14 +161,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_154017) do
   create_table "subcomments", force: :cascade do |t|
     t.string "content"
     t.string "status"
-    t.string "commenter_type", null: false
-    t.integer "commenter_id", null: false
+    t.string "subcommenter_type", null: false
+    t.integer "subcommenter_id", null: false
     t.integer "comment_id", null: false
     t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_subcomments_on_comment_id"
-    t.index ["commenter_type", "commenter_id"], name: "index_subcomments_on_commenter"
+    t.index ["subcommenter_type", "subcommenter_id"], name: "index_subcomments_on_subcommenter"
   end
 
   create_table "suppliers", force: :cascade do |t|

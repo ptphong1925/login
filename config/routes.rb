@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :subcomments
   resources :articles
   resources :songs
   resources :posts
-  resources :subcomments
   resources :likes
   resources :rates
   resources :nations

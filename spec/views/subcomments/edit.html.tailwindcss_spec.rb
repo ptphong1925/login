@@ -5,7 +5,7 @@ RSpec.describe "subcomments/edit", type: :view do
     Subcomment.create!(
       content: "MyString",
       status: "MyString",
-      commenter: nil,
+      subcommenter: nil,
       comment: nil,
       likes_count: 1
     )
@@ -24,7 +24,7 @@ RSpec.describe "subcomments/edit", type: :view do
 
       assert_select "input[name=?]", "subcomment[status]"
 
-      assert_select "input[name=?]", "subcomment[commenter_id]"
+      assert_select "input[name=?]", "subcomment[subcommenter_id]"
 
       assert_select "input[name=?]", "subcomment[comment_id]"
 

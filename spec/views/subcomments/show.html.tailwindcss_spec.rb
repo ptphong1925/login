@@ -5,7 +5,7 @@ RSpec.describe "subcomments/show", type: :view do
     assign(:subcomment, Subcomment.create!(
       content: "Content",
       status: "Status",
-      commenter: nil,
+      subcommenter: nil,
       comment: nil,
       likes_count: 2
     ))

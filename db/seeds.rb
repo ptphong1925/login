@@ -18,7 +18,7 @@ rails generate scaffold Article title content catalogue status poster:references
 rails generate scaffold Song title content catalogue status poster:references{polymorphic} likes_count:integer
 rails generate scaffold Video title content catalogue status poster:references{polymorphic} likes_count:integer
 rails generate scaffold Comment content status commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
-rails generate scaffold Subcomment content status commenter:references{polymorphic} comment:references likes_count:integer
+rails generate scaffold Subcomment content status subcommenter:references{polymorphic} comment:references likes_count:integer
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 
 
@@ -56,7 +56,7 @@ rails generate scaffold Like liker:references{polymorphic} likeable:references{p
                             birtday: Faker::Time.between(from: DateTime.now - 100.years, to: DateTime.now),
                             email: "admin#{n+1}@gmail.com",
                             ) }
-15.times { |n| User.create!(username: "user#{n+1}",
+20.times { |n| User.create!(username: "user#{n+1}",
                             password: "password",
                             password_confirmation: "password",
                             first_name: Faker::Name.first_name,
@@ -90,7 +90,7 @@ rails generate scaffold Like liker:references{polymorphic} likeable:references{p
 end
 #Song
 20.times do
-    person = (User.all + Admin.all).sample
+    person = User.singers.sample
     person.songs.build(title: Faker::Music.album, catalogue: Catalogue.pluck(:name).sample).save
 end
 #Video
@@ -99,32 +99,28 @@ end
     person.videos.build(title: Faker::Movies::Hobbit.character, catalogue: Catalogue.pluck(:name).sample).save
 end
 #Comment
-100.times do
-    person = (User.all + Admin.all).sample
-    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
-    comment.save
-    (Post.all + Song.all + Video.all).sample.comments << comment
-end
-#Subcomment
 200.times do
     person = (User.all + Admin.all).sample
+    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    (Article.all + Song.all + Video.all).sample.comments << comment
+end
+#Subcomment
+300.times do
+    person = (User.all + Admin.all).sample
     subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
-    subcomment.save
     Comment.all.sample.subcomments << subcomment
 end
 #Like
 500.times do
     person = (User.all + Admin.all).sample
     like = person.likes.build
-    like.save
-    (Post.all + Song.all + Video.all + Comment.all + Subcomment.all).sample.likes << like
+    (Article.all + Song.all + Video.all + Comment.all + Subcomment.all).sample.likes << like
 end
 #Rate
 400.times do
     person = (User.all + Admin.all).sample
     rate = person.rates.build
-    rate.save
-    (Post.all + Song.all + Video.all + Book.all).sample.rates << rate
+    (Article.all + Song.all + Video.all + Book.all).sample.rates << rate
 end
 
 
