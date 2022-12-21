@@ -15,8 +15,18 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= video.status %>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Poster:</strong>
     <%= video.poster_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Likes count:</strong>
+    <%= video.likes_count %>
   </p>
 
   <% if action_name != "show" %>

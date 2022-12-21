@@ -20,6 +20,11 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= admin.phone %>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Token user:</strong>
     <%= admin.token_user %>
   </p>
@@ -27,6 +32,26 @@
   <p class="my-5">
     <strong class="block font-medium mb-1">Email:</strong>
     <%= admin.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Balance:</strong>
+    <%= admin.balance %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Nation:</strong>
+    <%= admin.nation %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Birtday:</strong>
+    <%= admin.birtday %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Follows count:</strong>
+    <%= admin.follows_count %>
   </p>
 
   <% if action_name != "show" %>

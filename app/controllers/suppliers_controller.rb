@@ -1,10 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :authenticate_user!, except: :new
   before_action :set_supplier, only: %i[ show edit update destroy ]
-
-  before_action(only: [:show, :edit, :update, :destroy]) { authorize @supplier}
-  after_action(only: [:index]) { authorize @suppliers }
-  after_action(only: [:new, :create]) { authorize @supplier }
 
   # GET /suppliers or /suppliers.json
   def index
@@ -70,6 +65,6 @@ class SuppliersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def supplier_params
-      params.require(:supplier).permit(:name)
+      params.require(:supplier).permit(:name, :catalogue)
     end
 end

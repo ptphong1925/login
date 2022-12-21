@@ -1,10 +1,6 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: :new
 
-  before_action(only: [:show, :edit, :update, :destroy]) { authorize @admin }
-  after_action(only: [:index]) { authorize @admins }
-  after_action(only: [:new, :create]) { authorize @admin }
   # GET /admins or /admins.json
   def index
     @admins = Admin.all
@@ -69,6 +65,6 @@ class AdminsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.require(:admin).permit(:username, :password_digest, :first_name, :last_name, :token_user, :email)
+      params.require(:admin).permit(:username, :password_digest, :first_name, :last_name, :phone, :token_user, :email, :balance, :nation, :birtday, :follows_count)
     end
 end

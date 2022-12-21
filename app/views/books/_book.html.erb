@@ -1,11 +1,17 @@
 <div id="<%= dom_id book %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">Title:</strong>
-    <%= book.author.first_name %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
     <%= book.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= book.status %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Catalogue:</strong>
+    <%= book.catalogue %>
   </p>
 
   <p class="my-5">
@@ -29,8 +35,8 @@
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Views:</strong>
-    <%= book.views %>
+    <strong class="block font-medium mb-1">Views count:</strong>
+    <%= book.views_count %>
   </p>
 
   <p class="my-5">

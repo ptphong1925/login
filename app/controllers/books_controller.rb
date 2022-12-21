@@ -1,14 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
-  before_action(only: [:show, :edit, :update, :destroy]) { authorize @book }
-  after_action(only: [:index]) { authorize @books }
-  after_action(only: [:new, :create]) { authorize @book }
-
   # GET /books or /books.json
   def index
-    @books = FilterService.new(Book.joins(:author))
-    @books = @books.filer_by_keyword(params[:keyword], "books.title", "users.first_name", "users.last_name" )
+    @books = Book.all
   end
 
   # GET /books/1 or /books/1.json
@@ -70,6 +65,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :year_published, :isbn, :price, :out_of_print, :views, :supplier_id, :user_id)
+      params.require(:book).permit(:title, :status, :catalogue, :year_published, :isbn, :price, :out_of_print, :views_count, :supplier_id, :user_id)
     end
 end

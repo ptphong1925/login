@@ -1,10 +1,6 @@
 class VideosController < ApplicationController
-  before_action :authenticate_user!, except: :new
   before_action :set_video, only: %i[ show edit update destroy ]
 
-  before_action(only: [:show, :edit, :update, :destroy]) { authorize @video}
-  after_action(only: [:index]) { authorize @videos }
-  after_action(only: [:new, :create]) { authorize @video }
   # GET /videos or /videos.json
   def index
     @videos = Video.all
@@ -69,6 +65,6 @@ class VideosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def video_params
-      params.require(:video).permit(:title, :content, :catalogue, :poster_id, :poster_type)
+      params.require(:video).permit(:title, :content, :catalogue, :status, :poster_id, :poster_type, :likes_count)
     end
 end

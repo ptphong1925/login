@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_21_154017) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -54,71 +54,126 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
+    t.integer "phone"
     t.string "token_user"
     t.string "email"
+    t.decimal "balance"
+    t.string "nation"
+    t.datetime "birtday"
+    t.integer "follows_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "catalogue"
+    t.string "status"
+    t.string "poster_type", null: false
+    t.integer "poster_id", null: false
+    t.integer "likes_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poster_type", "poster_id"], name: "index_articles_on_poster"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
+    t.string "status"
+    t.string "catalogue"
     t.integer "year_published"
     t.integer "isbn"
     t.decimal "price"
     t.boolean "out_of_print"
-    t.integer "views"
+    t.integer "views_count"
     t.integer "supplier_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "catalogue"
     t.index ["supplier_id"], name: "index_books_on_supplier_id"
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "catalogues", force: :cascade do |t|
     t.string "name"
-    t.integer "catalogue_parent_id"
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
+    t.string "status"
     t.string "commenter_type", null: false
     t.integer "commenter_id", null: false
     t.string "commentable_type", null: false
     t.integer "commentable_id", null: false
+    t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["commenter_type", "commenter_id"], name: "index_comments_on_commenter"
   end
 
-  create_table "musics", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.string "catalogue"
-    t.string "poster_type", null: false
-    t.integer "poster_id", null: false
+  create_table "likes", force: :cascade do |t|
+    t.string "liker_type", null: false
+    t.integer "liker_id", null: false
+    t.string "likeable_type", null: false
+    t.integer "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["poster_type", "poster_id"], name: "index_musics_on_poster"
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
+    t.index ["liker_type", "liker_id"], name: "index_likes_on_liker"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.string "poster_type", null: false
-    t.integer "poster_id", null: false
+  create_table "nations", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.string "rate"
+    t.string "rater_type", null: false
+    t.integer "rater_id", null: false
+    t.string "rateable_type", null: false
+    t.integer "rateable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_rates_on_rateable"
+    t.index ["rater_type", "rater_id"], name: "index_rates_on_rater"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
     t.string "catalogue"
-    t.index ["poster_type", "poster_id"], name: "index_posts_on_poster"
+    t.string "status"
+    t.string "poster_type", null: false
+    t.integer "poster_id", null: false
+    t.integer "likes_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poster_type", "poster_id"], name: "index_songs_on_poster"
+  end
+
+  create_table "subcomments", force: :cascade do |t|
+    t.string "content"
+    t.string "status"
+    t.string "commenter_type", null: false
+    t.integer "commenter_id", null: false
+    t.integer "comment_id", null: false
+    t.integer "likes_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_subcomments_on_comment_id"
+    t.index ["commenter_type", "commenter_id"], name: "index_subcomments_on_commenter"
   end
 
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
+    t.string "catalogue"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,12 +183,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.string "role"
+    t.integer "phone"
     t.string "token_user"
     t.string "email"
-    t.integer "visits"
-    t.integer "orders_count"
-    t.integer "lock_version"
+    t.decimal "balance"
+    t.string "nation"
+    t.datetime "birtday"
+    t.integer "follows_count"
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -142,8 +199,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
     t.string "title"
     t.string "content"
     t.string "catalogue"
+    t.string "status"
     t.string "poster_type", null: false
     t.integer "poster_id", null: false
+    t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["poster_type", "poster_id"], name: "index_videos_on_poster"
@@ -153,4 +212,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_154108) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "suppliers"
   add_foreign_key "books", "users"
+  add_foreign_key "subcomments", "comments"
 end

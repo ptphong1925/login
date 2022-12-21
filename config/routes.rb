@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  resources :articles
+  resources :songs
+  resources :posts
+  resources :subcomments
+  resources :likes
+  resources :rates
+  resources :nations
   root "home#index"
   resources :videos
   resources :musics
   resources :comments
-  resources :posts
   resources :catalogues
   resources :admins
   resources :authors
