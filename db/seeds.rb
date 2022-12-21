@@ -90,7 +90,7 @@ rails generate scaffold Like liker:references{polymorphic} likeable:references{p
 end
 #Song
 20.times do
-    person = User.singers.sample
+    person = Singer.all.sample
     person.songs.build(title: Faker::Music.album, catalogue: Catalogue.pluck(:name).sample).save
 end
 #Video
