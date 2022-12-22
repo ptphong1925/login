@@ -4,14 +4,14 @@ class ApplicationController < ActionController::Base
     # skip_before_action :authenticate_user!
     # skip_after_action :verify_authorized
     before_action :authenticate_user!
-    after_action :verify_authorized
+    #after_action :verify_authorized
 
     helper_method :user_signed_in?, :current_user
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
 
     def current_user
-        if session[:token_person]
-            token = session[:token_person]
+        if session[:token_user]
+            token = session[:token_user]
             hmac_secret = 'my$ecretK3y'
             token_person = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
             person_id = token_person[0]['person_id']

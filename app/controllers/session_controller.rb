@@ -1,7 +1,7 @@
 class SessionController < ApplicationController
 
   skip_before_action :authenticate_user!
-  skip_after_action :verify_authorized
+  #skip_after_action :verify_authorized
 
   def create 
     @person = User.find_by(username: params[:username])
@@ -11,16 +11,16 @@ class SessionController < ApplicationController
       hmac_secret = 'my$ecretK3y'
       token_person = JWT.encode(payload, hmac_secret, 'HS256')
       @person.update(token_user: token_person)
-      session[:token_person] = token_person
+      session[:token_user] = token_person
       flash[:notice] = "Đăng nhập thành công!!!"
       redirect_to @person
-    else
+    else  
       redirect_to signin_path
     end
   end
    
   def destroy
-    session[:token_person] = nil
+    session[:token_user] = nil
     flash[:notice] = "Đăng xuất thành công!!!"
     redirect_to root_path
   end

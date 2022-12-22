@@ -3,9 +3,9 @@ class AuthorsController < ApplicationController
 
   before_action :set_author, only: %i[ show edit update destroy ]
 
-  before_action(only: [:show, :edit, :update, :destroy]) { authorize @author }
-  after_action(only: [:index]) { authorize @authors }
-  after_action(only: [:new, :create]) { authorize @author }
+  # before_action(only: [:show, :edit, :update, :destroy]) { authorize @author }
+  # after_action(only: [:index]) { authorize @authors }
+  # after_action(only: [:new, :create]) { authorize @author }
 
   def index
     @authors = FilterService.new(Author.all)
