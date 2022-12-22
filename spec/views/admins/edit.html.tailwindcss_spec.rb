@@ -7,7 +7,7 @@ RSpec.describe "admins/edit", type: :view do
       password_digest: "MyString",
       first_name: "MyString",
       last_name: "MyString",
-      phone: 1,
+      phone: "MyString",
       token_user: "MyString",
       email: "MyString",
       balance: "9.99",

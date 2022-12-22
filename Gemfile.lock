@@ -91,6 +91,7 @@ GEM
     case_transform (0.2)
       activesupport
     concurrent-ruby (1.1.10)
+    connection_pool (2.3.0)
     crass (1.0.6)
     debug (1.7.0)
       irb (>= 1.5.0)
@@ -103,6 +104,8 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.11.0)
+    et-orbi (1.2.7)
+      tzinfo
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -110,11 +113,15 @@ GEM
       railties (>= 5.0.0)
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.2)
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (1.2.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
     ffi (1.15.5)
+    fugit (1.8.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     groupdate (6.1.0)
@@ -153,6 +160,7 @@ GEM
     minitest (5.16.3)
     msgpack (1.6.0)
     multi_xml (0.6.0)
+    multipart-post (2.2.3)
     net-imap (0.3.1)
       net-protocol
     net-pop (0.1.2)
@@ -203,6 +211,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.4)
     rack-cors (1.1.1)
@@ -242,6 +251,8 @@ GEM
     rdoc (6.5.0)
       psych (>= 4.0.0)
     redis (4.8.0)
+    redis-client (0.11.2)
+      connection_pool
     regexp_parser (2.6.1)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -289,6 +300,14 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.0.2)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
+    sidekiq-cron (1.9.1)
+      fugit (~> 1.8)
+      sidekiq (>= 4.2.1)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -349,6 +368,8 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  faraday
+  faraday_middleware
   groupdate
   i18n
   image_processing (~> 1.2)
@@ -372,6 +393,7 @@ DEPENDENCIES
   scientist
   sdoc
   selenium-webdriver
+  sidekiq-cron
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails

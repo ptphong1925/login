@@ -7,12 +7,12 @@ RSpec.describe "users/show", type: :view do
       password_digest: "Password Digest",
       first_name: "First Name",
       last_name: "Last Name",
-      phone: 2,
+      phone: "Phone",
       token_user: "Token User",
       email: "Email",
       balance: "9.99",
       nation: "Nation",
-      follows_count: 3,
+      follows_count: 2,
       role: "Role"
     ))
   end
@@ -23,12 +23,12 @@ RSpec.describe "users/show", type: :view do
     expect(rendered).to match(/Password Digest/)
     expect(rendered).to match(/First Name/)
     expect(rendered).to match(/Last Name/)
-    expect(rendered).to match(/2/)
+    expect(rendered).to match(/Phone/)
     expect(rendered).to match(/Token User/)
     expect(rendered).to match(/Email/)
     expect(rendered).to match(/9.99/)
     expect(rendered).to match(/Nation/)
-    expect(rendered).to match(/3/)
+    expect(rendered).to match(/2/)
     expect(rendered).to match(/Role/)
   end
 end

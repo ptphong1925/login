@@ -4,12 +4,12 @@ FactoryBot.define do
     password_digest { "MyString" }
     first_name { "MyString" }
     last_name { "MyString" }
-    phone { 1 }
+    phone { "MyString" }
     token_user { "MyString" }
     email { "MyString" }
     balance { "9.99" }
     nation { "MyString" }
-    birtday { "2022-12-21 22:38:02" }
+    birtday { "2022-12-22 12:30:40" }
     follows_count { 1 }
   end
 end
