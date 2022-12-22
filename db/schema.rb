@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_053151) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_22_053954) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -114,6 +114,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_053151) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["commenter_type", "commenter_id"], name: "index_comments_on_commenter"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.string "follower_type", null: false
+    t.integer "follower_id", null: false
+    t.string "followable_type", null: false
+    t.integer "followable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followable_type", "followable_id"], name: "index_follows_on_followable"
+    t.index ["follower_type", "follower_id"], name: "index_follows_on_follower"
   end
 
   create_table "likes", force: :cascade do |t|

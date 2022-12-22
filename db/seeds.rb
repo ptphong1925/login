@@ -20,7 +20,7 @@ rails generate scaffold Video title content catalogue status poster:references{p
 rails generate scaffold Comment content status commenter:references{polymorphic} commentable:references{polymorphic} likes_count:integer
 rails generate scaffold Subcomment content status subcommenter:references{polymorphic} comment:references likes_count:integer
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
-
+rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
 
 
 
@@ -115,6 +115,12 @@ end
     person = (User.all + Admin.all).sample
     like = person.likes.build
     (Article.all + Song.all + Video.all + Comment.all + Subcomment.all).sample.likes << like
+end
+#Follow
+500.times do
+    person = (User.all + Admin.all).sample
+    follow = person.followings.build
+    (User.all + Admin.all).sample.followeds << follow
 end
 #Rate
 400.times do
