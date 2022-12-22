@@ -21,7 +21,7 @@ rails generate scaffold Comment content status commenter:references{polymorphic}
 rails generate scaffold Subcomment content status subcommenter:references{polymorphic} comment:references likes_count:integer
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
-rails generate scaffold Friend friender:references{polymorphic} friendable:references{polymorphic}
+rails generate scaffold Friend friender:references{polymorphic} accepted?:boolean friendable:references{polymorphic}
 
 
 #Profile = User#show
@@ -119,8 +119,14 @@ end
 #Follow
 500.times do
     person = (User.all + Admin.all).sample
-    follow = person.followings.build
-    (User.all + Admin.all).sample.followeds << follow
+    follow = person.followables.build
+    (User.all + Admin.all).sample.followers << follow
+end
+#Friend
+49.times do
+    person = (User.all + Admin.all).sample
+    friend = person.friendables.build(accepted?: [true, false].sample)
+    (User.all + Admin.all).sample.frienders << friend
 end
 #Rate
 200.times do
