@@ -21,7 +21,7 @@ rails generate scaffold Comment content status commenter:references{polymorphic}
 rails generate scaffold Subcomment content status subcommenter:references{polymorphic} comment:references likes_count:integer
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
-
+rails generate scaffold Friend friender:references{polymorphic} friendable:references{polymorphic}
 
 
 #Profile = User#show
