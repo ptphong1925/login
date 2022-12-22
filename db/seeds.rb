@@ -123,10 +123,10 @@ end
     (User.all + Admin.all).sample.followeds << follow
 end
 #Rate
-400.times do
+200.times do
     person = (User.all + Admin.all).sample
-    rate = person.rates.build
-    (Article.all + Song.all + Video.all + Book.all).sample.rates << rate
+    rate = person.rates.build(rate: rand(6))
+    (Song.all + Book.all).sample.rates << rate
 end
 
 

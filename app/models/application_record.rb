@@ -19,4 +19,9 @@ class ApplicationRecord < ActiveRecord::Base
     self.followers.map { |followship| followship.follower }
   end
 
+  def average_rate
+    array_rates = self.rates.pluck(:rate).map(&:to_i)
+    array_rates.sum/array_rates.size
+  end
+
 end
