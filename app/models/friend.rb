@@ -19,7 +19,7 @@ class Friend < ApplicationRecord
   def self.friends_of(person)
     friends = []
     array_of_Friend = Friend.where(friender_type: person.class.name, friender_id: person.id, accepted?: true).pluck(:friendable_type, :friendable_id)
-    array_of_Friend = array_of_Friend + Friend.where(friendable_type: person.class.name, friendable_id: person.id, accepted?: true).pluck(:friender_type, :friender_id)
+    array_of_Friend += Friend.where(friendable_type: person.class.name, friendable_id: person.id, accepted?: true).pluck(:friender_type, :friender_id)
     array_of_Friend.map { |class_name, id| class_name.constantize.find(id) }
   end
 
