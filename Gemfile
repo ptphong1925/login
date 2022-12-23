@@ -98,5 +98,4 @@ gem "omniauth-facebook"
 gem 'active_model_serializers'
 gem 'rubocop'
 gem 'sidekiq-cron'
-gem 'faraday'
-gem 'faraday_middleware'
+
