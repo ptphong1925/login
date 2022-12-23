@@ -6,11 +6,11 @@ class Follow < ApplicationRecord
     person1.followables.pluck(:followable_type, :followable_id).include?([person2.class.name, person2.id])
   end
 
-  def self.followables_with(person)
+  def self.followables_of(person)
     person.followables.map { |followship| followship.followable }
   end
 
-  def self.followers_with(person)
+  def self.followers_of(person)
     person.followers.map { |followship| followship.follower }
   end
   
