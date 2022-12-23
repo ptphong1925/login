@@ -123,7 +123,7 @@ end
     (User.all + Admin.all).sample.followers << follow
 end
 #Friend
-49.times do
+100.times do
     person = (User.all + Admin.all).sample
     friend = person.friendables.build(accepted?: [true, false].sample)
     (User.all + Admin.all).sample.frienders << friend

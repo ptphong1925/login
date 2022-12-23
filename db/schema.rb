@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_145222) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_23_021551) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -128,9 +128,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_145222) do
   end
 
   create_table "friends", force: :cascade do |t|
-    t.boolean "accepted?"
     t.string "friender_type", null: false
     t.integer "friender_id", null: false
+    t.boolean "accepted?"
     t.string "friendable_type", null: false
     t.integer "friendable_id", null: false
     t.datetime "created_at", null: false
