@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friends
   resources :follows
   resources :subcomments
   resources :articles

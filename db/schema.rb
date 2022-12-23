@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_053954) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_23_021551) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -125,6 +125,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_053954) do
     t.datetime "updated_at", null: false
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable"
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.string "friender_type", null: false
+    t.integer "friender_id", null: false
+    t.boolean "accepted?"
+    t.string "friendable_type", null: false
+    t.integer "friendable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friendable_type", "friendable_id"], name: "index_friends_on_friendable"
+    t.index ["friender_type", "friender_id"], name: "index_friends_on_friender"
   end
 
   create_table "likes", force: :cascade do |t|
