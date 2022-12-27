@@ -23,7 +23,7 @@ rails generate scaffold Like liker:references{polymorphic} likeable:references{p
 rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
 rails generate scaffold Friend friender:references{polymorphic} accepted?:boolean friendable:references{polymorphic}
 rails generate scaffold Role name
-rails generate scaffold Hashtag name counts:integer
+rails generate scaffold Hashtag name counts:integer hashtager:references{polymorphic} hashtagable:references{polymorphic}
 #tạo services để đếm hashtag theo crontab và lưu vào db
 
 #Profile = User#show
