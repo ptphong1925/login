@@ -91,11 +91,12 @@ gem 'pagy'
 gem 'scientist'
 gem 'factory_bot_rails'
 gem 'sdoc'
-gem "omniauth"
-gem "omniauth-rails_csrf_protection"
-gem "omniauth-google-oauth2"
-gem "omniauth-facebook"
 gem 'active_model_serializers'
-gem 'rubocop'
 gem 'sidekiq-cron'
 gem 'whenever', require: false
+gem 'ruby-statistics', '~> 3.0', '>= 3.0.1'
+# gem 'rubocop'
+# gem "omniauth"
+# gem "omniauth-rails_csrf_protection"
+# gem "omniauth-google-oauth2"
+# gem "omniauth-facebook"

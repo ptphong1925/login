@@ -22,7 +22,9 @@ rails generate scaffold Subcomment content status subcommenter:references{polymo
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
 rails generate scaffold Friend friender:references{polymorphic} accepted?:boolean friendable:references{polymorphic}
-
+rails generate scaffold Role name
+rails generate scaffold Hashtag name counts:integer
+#tạo services để đếm hashtag theo crontab và lưu vào db
 
 #Profile = User#show
 # rails generate scaffold Profile profiler:references{polymorphic}
