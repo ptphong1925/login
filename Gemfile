@@ -94,7 +94,7 @@ gem 'sdoc'
 gem 'active_model_serializers'
 gem 'sidekiq-cron'
 gem 'whenever', require: false
-gem 'ruby-statistics', '~> 3.0', '>= 3.0.1'
+gem 'ruby-statistics'
 # gem 'rubocop'
 # gem "omniauth"
 # gem "omniauth-rails_csrf_protection"
