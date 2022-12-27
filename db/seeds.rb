@@ -22,7 +22,7 @@ rails generate scaffold Subcomment content status subcommenter:references{polymo
 rails generate scaffold Like liker:references{polymorphic} likeable:references{polymorphic}
 rails generate scaffold Follow follower:references{polymorphic} followable:references{polymorphic}
 rails generate scaffold Friend friender:references{polymorphic} accepted?:boolean friendable:references{polymorphic}
-rails generate scaffold Hashtag name hashtags_count:integer hashtager:references{polymorphic} hashtagable:references{polymorphic}
+rails generate scaffold Hashtag name hashtags_count:integer
 #tạo services để đếm hashtag theo crontab và lưu vào db
 
 
@@ -101,11 +101,39 @@ end
     person.videos.build(title: Faker::Movies::Hobbit.character, catalogue: Catalogue.pluck(:name).sample).save
 end
 #Comment
-200.times do
+10.times do
     person = (User.all + Admin.all).sample
-    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample + " " + ["", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}"].sample(rand(0..2)).join(" "))
     (Article.all + Song.all + Video.all).sample.comments << comment
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Subcomment
 300.times do
     person = (User.all + Admin.all).sample
