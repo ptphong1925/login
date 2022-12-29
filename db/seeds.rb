@@ -9,8 +9,8 @@
 
 rails generate scaffold Catalogue name parent_id:integer
 rails generate scaffold Nation name
-rails generate scaffold Admin username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer
-rails generate scaffold User username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer role
+rails generate scaffold Admin username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer online_status
+rails generate scaffold User username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer role online_status
 rails generate scaffold Supplier name catalogue
 rails generate scaffold Book title status catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
 rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}
@@ -56,6 +56,7 @@ rails generate scaffold Hashtag name hashtags_count:integer hashtager:references
                             balance: Faker::Number.decimal(l_digits: 3, r_digits: 1),
                             nation: Nation.pluck(:name).sample,
                             birtday: Faker::Time.between(from: DateTime.now - 100.years, to: DateTime.now),
+                            online_status: ['online', 'offline', 'busy', 'invisible'].sample,
                             email: "admin#{n+1}@gmail.com",
                             ) }
 20.times { |n| User.create!(username: "user#{n+1}",
@@ -68,6 +69,7 @@ rails generate scaffold Hashtag name hashtags_count:integer hashtager:references
                             nation: Nation.pluck(:name).sample,
                             birtday: Faker::Time.between(from: DateTime.now - 100.years, to: DateTime.now),
                             email: "user#{n+1}@gmail.com",
+                            online_status: ['online', 'offline', 'busy', 'invisible'].sample,
                             role: ['basic', 'basic', 'basic', 'author', 'singer'].sample
                             ) }
 
