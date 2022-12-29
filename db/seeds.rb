@@ -9,8 +9,8 @@
 
 rails generate scaffold Catalogue name parent_id:integer
 rails generate scaffold Nation name
-rails generate scaffold Admin username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer online_status
-rails generate scaffold User username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer role online_status
+rails generate scaffold Admin username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer online_status last_activity_at:datetime
+rails generate scaffold User username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer role online_status last_activity:datetime
 rails generate scaffold Supplier name catalogue
 rails generate scaffold Book title status catalogue year_published:integer isbn:integer price:decimal out_of_print:boolean views_count:integer supplier:references user:references
 rails generate scaffold Rate rate rater:references{polymorphic} rateable:references{polymorphic}

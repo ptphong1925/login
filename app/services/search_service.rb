@@ -1,12 +1,10 @@
-class FilterService < ApplicationService
-    def initialize(collection)
-        @collection = collection
-    end
+class SearchService < ApplicationService
 
-    def filer_by_keyword(keyword, *field)
+    def self.by_keyword(collection, keyword, *field)
         if keyword.nil?
-            return @collection
+            collection
         else
+            keyword = keyword.downcase
             #Khai báo string rỗng
             filter_statement = ""
             #Tạo chuỗi string cho câu Query
@@ -14,8 +12,9 @@ class FilterService < ApplicationService
             #Loại bỏ " OR " ở chuỗi cuối cùng
             filter_statement = filter_statement[0..-5]
             #Thực hiện câu query
-            @collection = @collection.where(filter_statement, keyword: "%"+keyword+"%")
-            return @collection
+            collection = collection.where(filter_statement, keyword: "%"+keyword+"%")
+            collection
         end
     end
+
 end
