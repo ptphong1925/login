@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
+  root "home#index"
   resources :friends
   resources :follows
   resources :subcomments
@@ -11,7 +12,6 @@ Rails.application.routes.draw do
   resources :likes
   resources :rates
   resources :nations
-  root "home#index"
   resources :videos
   resources :musics
   resources :comments
