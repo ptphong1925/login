@@ -332,6 +332,7 @@ DEPENDENCIES
   scientist
   sdoc
   selenium-webdriver
+  sidekiq
   sidekiq-cron
   sprockets-rails
   sqlite3 (~> 1.4)
