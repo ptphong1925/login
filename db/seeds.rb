@@ -9,6 +9,7 @@
 
 rails generate scaffold Catalogue name parent_id:integer
 rails generate scaffold Nation name
+rails generate scaffold Violation name
 rails generate scaffold Admin username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer online_status last_activity_at:datetime
 rails generate scaffold User username password_digest first_name last_name phone token_user email balance:decimal nation birtday:datetime follows_count:integer role online_status last_activity:datetime
 rails generate scaffold Supplier name catalogue

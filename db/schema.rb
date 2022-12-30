@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_021551) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_30_052850) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -139,6 +139,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_021551) do
     t.index ["friender_type", "friender_id"], name: "index_friends_on_friender"
   end
 
+  create_table "hashtags", force: :cascade do |t|
+    t.string "name"
+    t.integer "hashtags_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.string "liker_type", null: false
     t.integer "liker_id", null: false
@@ -229,6 +236,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_021551) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["poster_type", "poster_id"], name: "index_videos_on_poster"
+  end
+
+  create_table "violate_words", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "violations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
