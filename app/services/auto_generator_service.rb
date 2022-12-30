@@ -1,4 +1,4 @@
-class AutobotService < ApplicationService
+class AutoGeneratorService < ApplicationService
 
   def self.run_all
     self.run_comment

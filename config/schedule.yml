@@ -1,4 +1,4 @@
-running_autobot:
+running_auto_generator:
   cron: "* * * * *"
-  class: "AutobotJob"
+  class: "AutoGeneratorJob"
   queue: default
