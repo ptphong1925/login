@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @feeds = FeedService.create
+    AutobotJob.perform_later
   end
 end
