@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-
   include Pundit::Authorization
   # skip_before_action :authenticate_user!
   # skip_after_action :verify_authorized
   before_action :authenticate_user!
+  before_action :set_paper_trail_whodunnit
   #after_action :verify_authorized
 
   helper_method :user_signed_in?, :current_user

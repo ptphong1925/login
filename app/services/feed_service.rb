@@ -1,4 +1,4 @@
-class FeedService
+class FeedService < ApplicationService
 
   def self.create
     total_feed = 5
