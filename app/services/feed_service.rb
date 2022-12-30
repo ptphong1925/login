@@ -1,8 +1,8 @@
 class FeedService
 
   def self.create
-    total_feed = 20
-    (Article.all).sample(total_feed)
+    total_feed = 5
+    (Article.last(5)).sample(5)
   end
 
 end

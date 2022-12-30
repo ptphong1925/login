@@ -2,7 +2,7 @@ class AutobotJob < ApplicationJob
   queue_as :default
 
   def perform
-    AutobotService.run_comment
+    AutobotService.run_all
   end
 
 end
