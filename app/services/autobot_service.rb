@@ -3,10 +3,28 @@ class AutobotService < ApplicationService
   def self.run_all
     self.run_comment
     self.run_subcomment
-    self.run_like
+    5.times { self.run_like }
+    self.run_user
     # self.run_rate
     # self.run_follow
     # need to be more
+  end
+
+  def self.run_user
+    User.create!(
+      username: "user#{Time.now.to_s}",
+      password: "password",
+      password_confirmation: "password",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      phone: Faker::PhoneNumber.cell_phone,
+      balance: Faker::Number.decimal(l_digits: 3, r_digits: 1),
+      nation: Nation.pluck(:name).sample,
+      birtday: Faker::Time.between(from: DateTime.now - 100.years, to: DateTime.now),
+      email: "user#{Time.now.to_s}}@gmail.com",
+      #online_status: ['online', 'offline', 'busy', 'invisible'].sample,
+      role: ['basic', 'basic', 'basic', 'author', 'singer'].sample
+    )
   end
 
   def self.run_comment
