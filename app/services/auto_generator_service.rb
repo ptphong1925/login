@@ -29,13 +29,13 @@ class AutoGeneratorService < ApplicationService
 
   def self.run_comment
     person = (User.all + Admin.all).sample
-    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    comment = person.comments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample + " " + ["", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}"].sample(rand(0..2)).join(" "))
     (Article.all + Song.all + Video.all).sample.comments << comment
   end
 
   def self.run_subcomment
     person = (User.all + Admin.all).sample
-    subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample)
+    subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample + " " + ["", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}"].sample(rand(0..2)).join(" "))
     Comment.all.sample.subcomments << subcomment
   end
 
