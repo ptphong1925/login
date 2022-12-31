@@ -7,7 +7,7 @@ class CommentPolicy < ApplicationPolicy
     end
 
     def new?
-        Comment.all.count < 1000
+        true
     end
 
     def create?

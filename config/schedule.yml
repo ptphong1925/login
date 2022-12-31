@@ -2,3 +2,8 @@ running_auto_generator:
   cron: "* * * * *"
   class: "AutoGeneratorJob"
   queue: default
+
+scan_violation:
+  cron: "*/5 * * * *"
+  class: "ViolationJob"
+  queue: default
