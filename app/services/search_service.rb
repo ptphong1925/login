@@ -17,4 +17,13 @@ class SearchService < ApplicationService
         end
     end
 
+    def self.by_date(collection, field, start_date: , end_date:)
+      if start_date.nil? && end_date.nil?
+        collection
+      else
+        collection = collection.where('#{field} > ?', start_date) if start_date.present?
+        collection = collection.where('#{field} < ?', end_date) if end_date.present?
+        collection
+    end
+
 end
