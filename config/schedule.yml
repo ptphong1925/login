@@ -1,3 +1,6 @@
+# :verbose: false
+# :dynamic: true
+
 running_auto_generator:
   cron: "* * * * *"
   class: "AutoGeneratorJob"
@@ -11,4 +14,14 @@ scan_violation:
 update_hash_tag:
   cron: "*/5 * * * *"
   class: "HashtagJob"
-  queue: default
+  queue: high_priority
+
+# development:
+#   :concurrency: 25
+# staging:
+#   :concurrency: 12
+# production:
+#   :concurrency: 25
+# :queues:
+# - [default, 1]
+# - [high_priority, 10]
