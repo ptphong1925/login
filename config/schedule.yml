@@ -7,3 +7,8 @@ scan_violation:
   cron: "*/5 * * * *"
   class: "ViolationJob"
   queue: default
+
+update_hash_tag:
+  cron: "*/5 * * * *"
+  class: "HashtagJob"
+  queue: default

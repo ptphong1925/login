@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_134802) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_31_164740) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -144,6 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_134802) do
     t.integer "hashtags_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_hashtags_on_name"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -246,12 +247,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_134802) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["poster_type", "poster_id"], name: "index_videos_on_poster"
-  end
-
-  create_table "violate_words", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "violations", force: :cascade do |t|

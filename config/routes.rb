@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :hashtags
   resources :violations
   require 'sidekiq/web'
   require 'sidekiq/cron/web'

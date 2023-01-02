@@ -3,10 +3,10 @@ class AutoGeneratorService < ApplicationService
   def self.run_all
     self.run_comment
     self.run_subcomment
-    5.times { self.run_like }
+    20.times { self.run_like }
     self.run_user
-    # self.run_rate
-    # self.run_follow
+    self.run_rate
+    self.run_follow
     # need to be more
   end
 
