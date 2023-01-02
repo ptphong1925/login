@@ -12,17 +12,20 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if session[:token_user]
-      token = session[:token_user]
-      hmac_secret = 'my$ecretK3y'
-      token_person = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
-      person_id = token_person[0]['person_id']
-      person_role = token_person.first['person_role']
-      
-      case person_role
-      when "Admin"
-        Admin.find(person_id)
-      when "User"
-        User.find(person_id)
+      begin
+        token = session[:token_user]
+        hmac_secret = Rails.application.secrets.secret_key_base
+        token_person = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
+        person_id = token_person[0]['person_id']
+        person_role = token_person.first['person_role']
+        case person_role
+        when "Admin"
+          Admin.find(person_id)
+        when "User"
+          User.find(person_id)
+        end
+      rescue JWT::ExpiredSignature, JWT::VerificationError
+        session[:token_user] = nil
       end
     end
   end
@@ -38,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def update_last_seen_at
-    current_user.update_attribute(:last_seen_at, Time.current)
+    current_user.update_attribute(:last_seen_at, Time.now)
   end
 
   private

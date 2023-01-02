@@ -25,6 +25,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        payload = { person_id: @user.id, person_role: @user.class.name, exp: ENV["TOKEN_EXPIRATION"].to_i.minutes.from_now.to_i }
+        hmac_secret = Rails.application.secrets.secret_key_base
+        token_person = JWT.encode(payload, hmac_secret, 'HS256')
+        @user.update(token_user: token_person)
+        session[:token_user] = token_person
+  
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
