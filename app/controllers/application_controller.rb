@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  include Pagy::Backend
   # skip_before_action :authenticate_user!
   # skip_after_action :verify_authorized
   before_action :authenticate_user!

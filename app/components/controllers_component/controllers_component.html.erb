@@ -1,0 +1,7 @@
+<% @basenames.each do |basename| %>
+  <% if basename == 'home' %>
+    <%= link_to "Home", root_path %>
+  <% else %>
+    <%= link_to basename.singularize.capitalize, url_for(controller: basename, action: 'index') %>
+  <% end %>
+<% end %>
