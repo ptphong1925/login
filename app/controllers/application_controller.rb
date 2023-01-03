@@ -14,11 +14,7 @@ class ApplicationController < ActionController::Base
   def current_user
     if session[:token_user]
       begin
-        token = session[:token_user]
-        hmac_secret = Rails.application.secrets.secret_key_base
-        token_person = JWT.decode(token, hmac_secret, true, { algorithm: 'HS256' })
-        person_id = token_person[0]['person_id']
-        person_role = token_person.first['person_role']
+        person_id, person_role = JsonWebToken.decode(session[:token_user])
         case person_role
         when "Admin"
           Admin.find(person_id)

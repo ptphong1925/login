@@ -7,11 +7,8 @@ class SessionController < ApplicationController
     @person = User.find_by(username: params[:username])
     @person = Admin.find_by(username: params[:username]) if @person.nil?
     if @person && @person.authenticate(params[:password])
-      payload = { person_id: @person.id, person_role: @person.class.name, exp: 5.minutes.from_now.to_i }
-      hmac_secret = Rails.application.secrets.secret_key_base
-      token_person = JWT.encode(payload, hmac_secret, 'HS256')
-      @person.update(token_user: token_person)
-      session[:token_user] = token_person
+      session[:token_user] = JsonWebToken.encode(@person)
+      # session[:token_user] = token_person
       flash[:notice] = "Đăng nhập thành công!!!"
       redirect_to @person
     else  

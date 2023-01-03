@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   resources :rates
   resources :nations
   resources :videos
-  resources :musics
   resources :comments
   resources :catalogues
   resources :admins

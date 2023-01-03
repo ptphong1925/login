@@ -13,23 +13,21 @@
 
   <body>
     <header>
-    <p>Tên: <%= ENV["NAME"] %></p>
-    <p>Passowrd: <%= ENV["PASSWORD"] %></p>
-      <div class="w-full">
-        <% if notice.present? %>
-          <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-        <% end %>
-      </div>
-    <% if user_signed_in?%>
-      Current user: <%= current_user.username %> || <%= current_user.role.capitalize %>
-      <%= button_to 'Signout', signout_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Signin', signin_path, method: :get %>
-      <%= link_to 'Signup', new_user_path, method: :get %>
-    <% end %>
-    <aside>
-      <%=  render(ControllersComponent.new)%>
-    </aside>
+        <div class="w-full">
+          <% if notice.present? %>
+            <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+          <% end %>
+        </div>
+      <% if user_signed_in?%>
+        Current user: <%= current_user.username %> || <%= current_user.role.capitalize %>
+        <%= button_to 'Signout', signout_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Signin', signin_path, method: :get %>
+        <%= link_to 'Signup', new_user_path, method: :get %>
+      <% end %>
+      <aside>
+        <%=  render(ControllersComponent.new)%>
+      </aside>
     </header>
     <main>
     <%= yield %>
