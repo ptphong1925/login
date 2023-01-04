@@ -108,31 +108,31 @@ end
     (Article.all + Song.all + Video.all).sample.comments << comment
 end
 #Subcomment
-300.times do
+10.times do
     person = (User.all + Admin.all).sample
     subcomment = person.subcomments.build(content: [Faker::Games::Dota.quote, Faker::Movies::HarryPotter.quote, Faker::Movies::Hobbit.quote, Faker::Quote.yoda, Faker::Games::Witcher.quote].sample + " " + ["", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}", "##{Faker::Nation.nationality}"].sample(rand(0..2)).join(" "))
     Comment.all.sample.subcomments << subcomment
 end
 #Like
-500.times do
+10.times do
     person = (User.all + Admin.all).sample
     like = person.likes.build
     (Article.all + Song.all + Video.all + Comment.all + Subcomment.all).sample.likes << like
 end
 #Follow
-500.times do
+10.times do
     person = (User.all + Admin.all).sample
     follow = person.followables.build
     (User.all + Admin.all).sample.followers << follow
 end
 #Friend
-100.times do
+10.times do
     person = (User.all + Admin.all).sample
     friend = person.friendables.build(accepted?: [true, false].sample)
     (User.all + Admin.all).sample.frienders << friend
 end
 #Rate
-200.times do
+10.times do
     person = (User.all + Admin.all).sample
     rate = person.rates.build(rate: rand(6))
     (Song.all + Book.all).sample.rates << rate

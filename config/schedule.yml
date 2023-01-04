@@ -14,7 +14,7 @@ scan_violation:
 update_hash_tag:
   cron: "*/5 * * * *"
   class: "HashtagJob"
-  queue: high_priority
+  queue: default
 
 # development:
 #   :concurrency: 25
