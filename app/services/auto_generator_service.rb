@@ -7,6 +7,7 @@ class AutoGeneratorService < ApplicationService
     self.run_user
     self.run_rate
     self.run_follow
+    self.run_last_seen_at
     # need to be more
   end
 
@@ -49,6 +50,10 @@ class AutoGeneratorService < ApplicationService
     person = (User.all + Admin.all).sample
     follow = person.followables.build
     (User.all + Admin.all).sample.followers << follow
+  end
+
+  def self.run_last_seen_at
+    User.all.sample.update(last_seen_at: Time.now)
   end
 
   def self.run_rate
