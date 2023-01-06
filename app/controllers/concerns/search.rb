@@ -1,4 +1,4 @@
-class SearchService < ApplicationService
+class Search
 
   def self.by_keyword(collection, keyword, *field)
     if keyword.nil?

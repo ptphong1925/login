@@ -1,4 +1,4 @@
-class JsonWebToken < ApplicationService
+class JsonWebToken
   TOKEN_EXPIRATION = 5
 
   def self.encode(person)

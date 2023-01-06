@@ -8,7 +8,7 @@ class AuthorsController < ApplicationController
   # after_action(only: [:new, :create]) { authorize @author }
 
   def index
-    @authors = SearchService.by_keyword(Author.all, params[:keyword], "users.username", "users.first_name", "users.last_name" )
+    @authors = Search.by_keyword(Author.all, params[:keyword], "users.username", "users.first_name", "users.last_name" )
   end
 
   def show

@@ -1,4 +1,5 @@
 class CurrentUser
+
   def self.confirm(token_user)
     person_id, person_role = JsonWebToken.decode(token_user)
     case person_role
@@ -8,4 +9,5 @@ class CurrentUser
       User.find(person_id)
     end
   end
+  
 end
