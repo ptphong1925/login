@@ -13,7 +13,7 @@ class Api::V1::ApiController < ActionController::Base
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
 
   def current_user
-    if token_user = params[:token_user]
+    if token_user = request.headers['Authorization'].split(" ").last
       begin
         person_id, person_role = JsonWebToken.decode(token_user)
         case person_role
