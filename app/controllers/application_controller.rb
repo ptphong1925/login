@@ -14,13 +14,7 @@ class ApplicationController < ActionController::Base
   def current_user
     if session[:token_user]
       begin
-        person_id, person_role = JsonWebToken.decode(session[:token_user])
-        case person_role
-        when "Admin"
-          Admin.find(person_id)
-        when "User"
-          User.find(person_id)
-        end
+        @current_user ||= CurrentUser.confirm(session[:token_user])
       rescue JWT::ExpiredSignature, JWT::VerificationError
         session[:token_user] = nil
       end
