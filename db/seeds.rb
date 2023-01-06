@@ -24,14 +24,18 @@ rails generate scaffold Follow follower:references{polymorphic} followable:refer
 rails generate scaffold Friend friender:references{polymorphic} accepted?:boolean friendable:references{polymorphic}
 rails generate scaffold Hashtag name:string:index hashtags_count:integer
 rails generate scaffold Statistic total_user:integer active_user:integer
+rails generate scaffold ChatRoom 
+rails generate scaffold GroupRoom
+rails generate scaffold MessageChat content user:references
+rails generate scaffold MessageGroup content user:references
 #tạo services để đếm hashtag theo crontab và lưu vào db
 
 
-#Profile = User#show
+# Profile = User#show
 # rails generate scaffold Profile profiler:references{polymorphic}
 # rails generate scaffold Location name parent_id:integer nation:references
 # rails generate scaffold Orginazation name catalogue
-#không nên dùng Post cho tất cả, vì mỗi chilrent là rất lớn
+# không nên dùng Post cho tất cả, vì mỗi chilrent là rất lớn
 # rails generate scaffold Payment status
 # rails generate scaffold Order status date_submited:time status:integer subtotal:decimal shipping:decimal tax:decimal total:decimal customer:references 
 # rails generate scaffold Invoice

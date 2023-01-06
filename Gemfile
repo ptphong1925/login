@@ -96,6 +96,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'whenever', require: false
 gem 'ruby-statistics'
+# gem 'twilio-ruby'
 # gem 'rubocop'
 # gem "omniauth"
 # gem "omniauth-rails_csrf_protection"
