@@ -12,9 +12,25 @@ class Api::V1::ApiController < ActionController::Base
   rescue_from JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError do |exception|
     render json: { error: 'unauthorized' }, status: :unauthorized
   end
+  # rescue_from JWT::ExpiredSignature, with: :expired_signature
+  # def expired_signature
+  #   render json: { message: 'Signature has expired' }, status: :unauthorized
+  # end
   def current_user
     @token_user ||= request.headers["Authorization"].split(" ").last
-    @current_user ||= CurrentUser.find_by(@token_user)
+    # if @token_user
+    #   @current_user ||= CurrentUser.find_by(@token_user)
+    # end
+    hmac_secret = Rails.application.secrets.secret_key_base
+    token_person = JWT.decode(@token_user, hmac_secret, true, { algorithm: 'HS256' })
+    person_id = token_person[0]['person_id']
+    person_role = token_person.first['person_role']
+    case person_role
+    when "Admin"
+      Admin.find(person_id)
+    when "User"
+      User.find(person_id)
+    end
   end
 
   def user_signed_in?
