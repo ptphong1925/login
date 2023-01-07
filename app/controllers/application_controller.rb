@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_signed_in?, :current_user
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
-
+  
   def current_user
     if session[:token_user]
       begin

@@ -1,5 +1,5 @@
 class JsonWebToken
-  TOKEN_EXPIRATION = 5
+  TOKEN_EXPIRATION = 1
 
   def self.encode(person)
     payload = { person_id: person.id, person_role: person.class.name, exp: TOKEN_EXPIRATION.minutes.from_now.to_i }

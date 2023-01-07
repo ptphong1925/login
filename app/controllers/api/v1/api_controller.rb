@@ -9,24 +9,12 @@ class Api::V1::ApiController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   #after_action :verify_authorized
 
-  # helper_method :user_signed_in?, :current_user
-  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
-
+  rescue_from JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError do |exception|
+    render json: { error: 'unauthorized' }, status: :unauthorized
+  end
   def current_user
-    if token_user = request.headers['Authorization'].split(" ").last
-      begin
-        person_id, person_role = JsonWebToken.decode(token_user)
-        case person_role
-        when "Admin"
-          @current_user ||= Admin.find(person_id)
-        when "User"
-          @current_user ||= User.find(person_id)
-        end
-
-      rescue JWT::ExpiredSignature, JWT::VerificationError
-        params[:token_user] = nil
-      end
-    end
+    @token_user ||= request.headers["Authorization"].split(" ").last
+    @current_user ||= CurrentUser.find_by(@token_user)
   end
 
   def user_signed_in?
@@ -48,6 +36,10 @@ class Api::V1::ApiController < ActionController::Base
   def user_not_authorized(exception)
     flash[:notice] = "You are not authorized to perform this action."
     head 404
+  end
+
+  def rescue_fail_token
+    render json: { error: 'unauthorized' }, status: :unauthorized
   end
   
   
