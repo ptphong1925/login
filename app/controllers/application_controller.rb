@@ -9,15 +9,15 @@ class ApplicationController < ActionController::Base
   #after_action :verify_authorized
 
   helper_method :user_signed_in?, :current_user
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
   
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized  
+  rescue_from JWT::ExpiredSignature, JWT::VerificationError do |exception|
+    session[:token_user] = nil
+    redirect_to signin_path
+  end
   def current_user
     if session[:token_user]
-      begin
-        @current_user ||= CurrentUser.confirm(session[:token_user])
-      rescue JWT::ExpiredSignature, JWT::VerificationError
-        session[:token_user] = nil
-      end
+      @current_user ||= CurrentUser.find_by(session[:token_user])
     end
   end
 

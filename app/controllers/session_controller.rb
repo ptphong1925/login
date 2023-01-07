@@ -8,7 +8,6 @@ class SessionController < ApplicationController
     @person = Admin.find_by(username: params[:username]) if @person.nil?
     if @person && @person.authenticate(params[:password])
       session[:token_user] = JsonWebToken.encode(@person)
-      # session[:token_user] = token_person
       flash[:notice] = "Đăng nhập thành công!!!"
       redirect_to @person
     else  
