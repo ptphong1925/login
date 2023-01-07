@@ -9,28 +9,13 @@ class Api::V1::ApiController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   #after_action :verify_authorized
 
-  rescue_from JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError do |exception|
-    render json: { error: 'unauthorized' }, status: :unauthorized
-  end
-  # rescue_from JWT::ExpiredSignature, with: :expired_signature
-  # def expired_signature
-  #   render json: { message: 'Signature has expired' }, status: :unauthorized
-  # end
   def current_user
     @token_user ||= request.headers["Authorization"].split(" ").last
-    # if @token_user
-    #   @current_user ||= CurrentUser.find_by(@token_user)
-    # end
-    hmac_secret = Rails.application.secrets.secret_key_base
-    token_person = JWT.decode(@token_user, hmac_secret, true, { algorithm: 'HS256' })
-    person_id = token_person[0]['person_id']
-    person_role = token_person.first['person_role']
-    case person_role
-    when "Admin"
-      Admin.find(person_id)
-    when "User"
-      User.find(person_id)
+    if @token_user
+      @current_user ||= CurrentUser.find_by(@token_user)
     end
+    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+      false
   end
 
   def user_signed_in?
@@ -39,7 +24,7 @@ class Api::V1::ApiController < ActionController::Base
 
   def authenticate_user!
     if !user_signed_in?
-      redirect_to signin_path
+      render json: { error: 'unauthorized' }, status: :unauthorized
     end
   end
 
