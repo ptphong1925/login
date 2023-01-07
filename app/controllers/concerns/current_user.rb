@@ -1,6 +1,6 @@
 class CurrentUser
 
-  def self.confirm(token_user)
+  def self.find_by(token_user)
     person_id, person_role = JsonWebToken.decode(token_user)
     case person_role
     when "Admin"
