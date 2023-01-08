@@ -1,50 +1,47 @@
 class Api::V1::UsersController < Api::V1::ApiController
+  skip_before_action :authenticate_user!, only: [:create]
+  skip_before_action :update_last_seen_at
+  skip_before_action :set_paper_trail_whodunnit
   before_action :set_user, only: %i[ show edit update destroy ]
+
+  serialization_scope :view_context
 
   # GET /users or /users.json
   def index
     @users = User.all.header_sort(params[:sort], params[:direction])
+    render json: @users, status: :ok
   end
 
   # GET /users/1 or /users/1.json
   def show
+    render json: { success: true, user: @user.as_json }, status: :created
   end
 
   # GET /users/new
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
 
   # GET /users/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        session[:token_user] = JsonWebToken.encode(@user)
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render json: @user, status: :created
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -66,6 +63,6 @@ class Api::V1::UsersController < Api::V1::ApiController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :password_digest, :first_name, :last_name, :phone, :token_user, :email, :balance, :nation, :birtday, :follows_count, :role)
+      params.permit(:username, :password, :password_confirmation, :first_name, :last_name, :phone, :token_user, :email, :balance, :nation, :birtday)
     end
 end

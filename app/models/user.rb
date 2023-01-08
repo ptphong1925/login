@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attribute :role, default: 'basic'
   has_secure_password
   validate :username_uniqueness, on: :create
 
