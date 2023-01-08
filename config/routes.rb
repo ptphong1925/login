@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'signin', to: 'session#create'
       resources :users, only: [:index, :show, :create, :update]
+      resources :comments
     end
   end
 

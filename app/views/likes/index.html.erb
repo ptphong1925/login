@@ -7,8 +7,9 @@
     <h1 class="font-bold text-4xl">Likes</h1>
     <%= link_to 'New like', new_like_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
+  <%== pagy_nav(@pagy) %>
   <div id="likes" class="min-w-full">
     <%= render @likes %>
   </div>
+
 </div>
