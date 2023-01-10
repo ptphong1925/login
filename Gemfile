@@ -89,7 +89,7 @@ gem 'discard'
 gem 'pagy'
 gem 'sidekiq'
 gem 'sidekiq-cron'
-
+gem 'simplecov', require: false, group: :test
 
 # gem 'sdoc'
 # gem 'groupdate'
