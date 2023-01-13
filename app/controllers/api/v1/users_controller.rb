@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApiController
   skip_before_action :authenticate_user!, only: [:create]
-  skip_before_action :update_last_seen_at
+  skip_before_action :update_last_seen_at, only: [:create]
   skip_before_action :set_paper_trail_whodunnit
   before_action :set_user, only: %i[ show edit update destroy ]
 
