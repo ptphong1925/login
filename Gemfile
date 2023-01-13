@@ -91,6 +91,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'simplecov', require: false, group: :test
 
+# gem 'faraday'
 # gem 'sdoc'
 # gem 'groupdate'
 # gem 'scientist'
@@ -103,7 +104,7 @@ gem 'simplecov', require: false, group: :test
 # gem 'searchkick'
 # gem 'twilio-ruby'
 # gem 'rubocop'
-# gem "omniauth"
-# gem "omniauth-rails_csrf_protection"
+gem "omniauth"
+gem "omniauth-rails_csrf_protection"
 # gem "omniauth-google-oauth2"
 # gem "omniauth-facebook"
