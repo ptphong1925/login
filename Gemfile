@@ -104,7 +104,8 @@ gem 'simplecov', require: false, group: :test
 # gem 'searchkick'
 # gem 'twilio-ruby'
 # gem 'rubocop'
-gem "omniauth"
+# gem "omniauth"
+gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
-# gem "omniauth-google-oauth2"
+
 # gem "omniauth-facebook"

@@ -7,6 +7,6 @@ class ControllersComponent < ViewComponent::Base
       @basenames << File.basename(path).remove("_controller.rb") if File.exist?(path)
     end
     @basenames.delete_at(@basenames.index('application'))
-    @basenames.delete_at(@basenames.index('session'))
+    @basenames.delete_at(@basenames.index('sessions'))
   end
 end

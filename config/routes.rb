@@ -20,9 +20,11 @@ Rails.application.routes.draw do
   resources :authors
   resources :books
   resources :suppliers
-  get 'signin', to: 'session#new'
-  post 'signin', to: 'session#create'
-  delete 'signout', to: 'session#destroy'
+  get 'signin', to: 'sessions#new'
+  post 'signin', to: 'sessions#create'
+  delete 'signout', to: 'sessions#destroy'
+  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
+
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

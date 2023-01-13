@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_052349) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_071723) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -225,7 +225,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_052349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_seen_at"
-    t.integer "uid"
+    t.string "uid", limit: 25
     t.string "provider"
   end
 
