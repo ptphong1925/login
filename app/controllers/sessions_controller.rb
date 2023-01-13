@@ -38,6 +38,7 @@ class SessionsController < ApplicationController
     if @user.valid?
       session[:token_user] = JsonWebToken.encode(@user)
       flash[:notice] = "Đăng nhập thành công!!!"
+      SigninMailer.new_signin(@user).deliver_now
       redirect_to @user
     else
       flash[:notice] = 'Credential error'
