@@ -48,8 +48,8 @@ Rails.application.configure do
       address: "smtp.gmail.com",
       port: 587,
       :domain => 'smtp.gmail.com',
-      user_name: 'pkphung2001@gmail.com',  # Tên tài khoản gmail mà các bạn tạo mật khẩu ứng dụng.
-      password: 'wzljfpffupmowmos',      # Mật khẩu ứng dụng của các bạn. (ở đây mình cố tình thay bằng dấu * đấy)
+      user_name: ENV['GMAIL_USERNAME'],  # Tên tài khoản gmail mà các bạn tạo mật khẩu ứng dụng.
+      password: ENV['GMAIL_APP_PASSWORD'],      # Mật khẩu ứng dụng của các bạn. (ở đây mình cố tình thay bằng dấu * đấy)
       authentication: :plain
   }
 
