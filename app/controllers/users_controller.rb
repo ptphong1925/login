@@ -61,7 +61,10 @@ class UsersController < ApplicationController
   end
 
   def last_seen_at
+    if @user.last_seen_at.nil? ||
+      @user.last_seen_at < ENV["LAST_SEEN_AT"].to_i.minutes.ago
     @user.update(user_params)
+    end
   end
 
   private
