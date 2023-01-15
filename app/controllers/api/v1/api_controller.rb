@@ -5,7 +5,7 @@ class Api::V1::ApiController < ActionController::Base
   # skip_before_action :authenticate_user!
   # skip_after_action :verify_authorized
   before_action :authenticate_user!
-  # before_action :update_last_seen_at, if: -> { user_signed_in? && (!current_user.admin?) && (current_user.last_seen_at.nil? || current_user.last_seen_at < ENV["LAST_SEEN_AT_THRESHOLD"].to_i.minutes.ago) }
+  # before_action :update_last_seen_at, if: -> { user_signed_in? && (!current_user.admin?) && (current_user.last_seen_at.nil? || current_user.last_seen_at < ENV["LAST_SEEN_AT"].to_i.minutes.ago) }
   before_action :set_paper_trail_whodunnit
   #after_action :verify_authorized
 

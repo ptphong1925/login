@@ -5,7 +5,7 @@ class LastSeenAtComponent < ViewComponent::Base
     @current_user = current_user
     @user_signed_in = user_signed_in
     #setInterval unit: milisecond
-    @time_setinterval = ENV['LAST_SEEN_AT_THRESHOLD'].to_i.minutes.in_seconds*1000
+    @time_setinterval = ENV['LAST_SEEN_AT'].to_i.minutes.in_seconds*1000
   end
 
 end
