@@ -25,7 +25,11 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 
-  resources :users
+  resources :users do
+    member do
+      post 'last_seen_at'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

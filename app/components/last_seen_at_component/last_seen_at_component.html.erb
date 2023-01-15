@@ -1,5 +1,5 @@
 <% if @user_signed_in && @current_user.class.name == 'User' %>
-  <%= button_to 'last_seen_at', user_path(@current_user),form: { id: 'last_seen_at', style: 'display:none'}, method: :patch, params: { user: { last_seen_at: Time.now } } %>
+  <%= button_to 'last_seen_at', last_seen_at_user_path(@current_user),form: { id: 'last_seen_at', style: 'display:none'}, method: :patch, params: { user: { last_seen_at: Time.now } } %>
   <script>
     function lastSeenAt() {
       document.getElementById('last_seen_at').submit();
