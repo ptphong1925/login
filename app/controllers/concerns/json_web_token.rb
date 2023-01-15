@@ -1,9 +1,9 @@
 class JsonWebToken
-  TOKEN_EXPIRATION = 1
+  EXPIRATION = ENV['TOKEN_EXPIRATION'].to_i.minutes.from_now.to_i
   JWT_SECRET_KEY = Rails.application.secrets.secret_key_base
 
   def self.encode(person)
-    payload = { person_id: person.id, person_role: person.class.name, exp: TOKEN_EXPIRATION.minutes.from_now.to_i }
+    payload = { person_id: person.id, person_role: person.class.name, exp: EXPIRATION }
     hmac_secret = JWT_SECRET_KEY
     token_person = JWT.encode(payload, hmac_secret, 'HS256')
     person.update(token_user: token_person)
