@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      post 'last_seen_at'
+      put 'last_seen_at'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -1,9 +1,20 @@
 <% if @user_signed_in && @current_user.class.name == 'User' %>
-  <%= button_to 'last_seen_at', last_seen_at_user_path(@current_user),form: { id: 'last_seen_at', style: 'display:none'}, method: :patch, params: { user: { last_seen_at: Time.now } } %>
+  
+  <%= form_with(url: last_seen_at_user_path(@current_user), method: :put, id: 'last_seen_at', style: 'display:none') do %>
+    <input type='date' id='time_now' name='user[last_seen_at]' value='' >
+  <% end %>
+
+
+
+
+
   <script>
     function lastSeenAt() {
+      var timeNow = new Date().toISOString().substring(0, 10);
+      document.getElementById("time_now").value = timeNow;
       document.getElementById('last_seen_at').submit();
     }
-    setInterval(lastSeenAt, <%= @time_setinterval %>);
+    setInterval(lastSeenAt, 5000);
   </script>
+
 <% end %>

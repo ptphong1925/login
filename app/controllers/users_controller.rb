@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
   # skip_before_action :update_last_seen_at
   skip_before_action :set_paper_trail_whodunnit
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy last_seen_at ]
 
   # GET /users or /users.json
   def index
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+
   end
 
   # GET /users/new
