@@ -1,6 +1,6 @@
 class Api::V1::SessionController < Api::V1::ApiController
   skip_before_action :authenticate_user!
-  skip_before_action :update_last_seen_at
+  # skip_before_action :update_last_seen_at
   skip_before_action :set_paper_trail_whodunnit
   def create
     @person = User.find_by(username: params[:username])

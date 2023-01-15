@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     @person = Admin.find_by(username: params[:username]) if @person.nil?
     if @person && @person.authenticate(params[:password])
       session[:token_user] = JsonWebToken.encode(@person)
-      SigninMailer.new_signin(@person).deliver
+      # SigninMailer.new_signin(@person).deliver
       flash[:notice] = "Đăng nhập thành công!!!"
       redirect_to @person
     else  
@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
     if @user.valid?
       session[:token_user] = JsonWebToken.encode(@user)
       flash[:notice] = "Đăng nhập thành công!!!"
-      SigninMailer.new_signin(@user).deliver_now
+      # SigninMailer.new_signin(@user).deliver_now
       redirect_to @user
     else
       flash[:notice] = 'Credential error'

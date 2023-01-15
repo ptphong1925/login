@@ -2,11 +2,11 @@
 
 require "test_helper"
 
-class FilterFormComponentTest < ViewComponent::TestCase
+class SearchFormComponentTest < ViewComponent::TestCase
   def test_component_renders_something_useful
     # assert_equal(
     #   %(<span>Hello, components!</span>),
-    #   render_inline(FilterFormComponent.new(message: "Hello, components!")).css("span").to_html
+    #   render_inline(SearchFormComponent.new(message: "Hello, components!")).css("span").to_html
     # )
   end
 end

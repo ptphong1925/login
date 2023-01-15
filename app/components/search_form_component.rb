@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FilterFormComponent < ViewComponent::Base
+class SearchFormComponent < ViewComponent::Base
   def initialize(url:, method: :get)
     @url = url
     @method = method
