@@ -59,10 +59,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # PUT /users/1/last_seen_at
   def last_seen_at
     if current_user.last_seen_at.nil? ||
       current_user.last_seen_at < ENV["LAST_SEEN_AT"].to_i.minutes.ago
-      current_user.update(user_params)
+      current_user.update(last_seen_at: Time.now - 30.seconds)
     end
   end
 

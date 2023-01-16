@@ -1,13 +1,12 @@
 <% if @user_signed_in && @current_user.class.name == 'User' %>
   
   <%= form_with(url: last_seen_at_user_path(@current_user), method: :put, id: 'last_seen_at', style: 'display:none') do %>
-    <input style='display: none' type='text' id='time_now' name='user[last_seen_at]' value='' >
   <% end %>
 
   <script>
     function lastSeenAt() {
-      var timeNow = new Date();//.toISOString().substring(0, 30);
-      document.getElementById("time_now").value = timeNow;
+      // var timeNow = new Date();//.toISOString().substring(0, 30);
+      // document.getElementById("time_now").value = timeNow;
       document.getElementById('last_seen_at').submit();
     }
     setInterval(lastSeenAt, <%= @time_setinterval %> );
