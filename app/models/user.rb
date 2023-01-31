@@ -2,6 +2,8 @@ class User < ApplicationRecord
   attribute :role, default: 'basic'
   has_secure_password
   validate :username_uniqueness, on: :create
+  validates :email, presence: true
+  validates :username, presence: true
 
   enum role: { basic: 'basic', author: 'author', singer: 'singer' }
   
