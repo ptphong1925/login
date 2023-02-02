@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :catalogues
   resources :hashtags
   resources :violations
   require 'sidekiq/web'
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
   resources :nations
   resources :videos
   resources :comments
-  resources :catalogues
   resources :admins
   resources :authors
   resources :books
