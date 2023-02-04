@@ -61,4 +61,15 @@ RSpec.describe User, type: :model do
       expect(association(:rates)).to eq(:has_many)
     end
   end
+
+  def test
+    1/0
+  end
+
+  describe 'test' do
+    it 'should raise error' do
+      # puts test
+      expect { 1/0 }.to raise_exception(ZeroDivisionError)
+    end
+  end
 end

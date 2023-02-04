@@ -50,3 +50,49 @@ end
 # before_action(only: [:show, :edit, :update, :destroy]) { authorize @user }
 # after_action(only: [:index]) { authorize @users }
 # after_action(only: [:new, :create]) { authorize @user }
+
+# def some_code_1
+#   # some code
+# end
+
+# def some_code_2
+#   # some code
+# end
+
+
+# def create
+#   some_code_1
+#   rescue Savon::Error => e
+#     some_code_2
+#     @retry_count += 1
+#     if RETRY_MAX_COUNT > @retry_count
+#       SfRelatedLead.update_after_converted_on_sf(call_target, current_client)
+#       retry
+#     else
+#       raise XXCLASS, 'xx error'
+#     end
+#   end
+# end
+
+
+
+# Rspec.describe 'create method' do
+#   describe 'create' do
+#     begin
+#       it 'no-exception' do
+#         expect(create).not_to raise_error(Savon::Error)
+#       end
+#     rescue Savon::Error
+#       begin
+#         it 'retry exception' do
+#           expect(create).not_to raise_error(Savon::Error)
+#         end
+#       rescue XXCLASS
+#         it 'fail retry' do
+#           expect(create).to raise_error(XXCLASS)
+#         end
+#       end
+#     end
+#   end
+# end
+
